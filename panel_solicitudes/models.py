@@ -33,6 +33,28 @@ class Categoria(models.Model):
     def __str__(self):
         return self.nombre
 
+
+    #   Unirlas a las categorias 
+    #   Unir las Tareas a Oficio
+    #   Crear Tareas
+class Tarea(models.Model):
+    nombre = models.TextField()
+    descripcion = models.TextField()
+
+    def __str__(self):
+        return self.nombre
+
+    #   
+    #   Oficios es el Conjunto de las tareas que puede hacer un Maestro
+    #   Por lo tanto es creado por los Usuarios
+    #
+class Oficio(models.Model):
+    nombre = models.TextField()
+
+    def __str__(self):
+        return self.nombre
+
+
 class Estado(models.Model):
     nombre = models.TextField()
 
