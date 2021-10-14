@@ -49,12 +49,12 @@ class Tarea(models.Model):
     #   Oficios es el Conjunto de las tareas que puede hacer un Maestro
     #   Por lo tanto es creado por los Usuarios
     #
-class Oficio(models.Model):
-    nombre = models.TextField()
+    """ class Oficio(models.Model):
+            nombre = models.TextField()
 
-    def __str__(self):
-        return self.nombre
-
+            def __str__(self):
+                return self.nombre
+    """
 
 class Estado(models.Model):
     nombre = models.TextField()
@@ -87,6 +87,7 @@ class Usuario(models.Model):
 class Foto(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, blank=True, null=True)
     upload = models.FileField(upload_to=user_directory_path)
+    
     def __str__(self):
         return "%s %s %s" % (self.usuario.nombre, self.usuario.apellidos, self.usuario.rut)
         #return self.usuario.rut
@@ -96,7 +97,7 @@ class PerfilMaestro(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, blank=True, null=True)
     #   Creacion de la relacion de los perfiles de maestros a las tareas que pueden ejecutar
-    tareas = models.ManyToManyField(Tarea, on_delete=models.SET_NULL, blank=True, null=True)
+    tareas = models.ManyToManyField(Tarea, blank=True)
 
     created_date = models.DateTimeField(
         default=timezone.now)
@@ -115,6 +116,7 @@ class SolicitudTarea(models.Model):
     created_date = models.DateTimeField(
         default=timezone.now)
     fecha = models.DateTimeField()
+
     def __str__(self):
         return "%s %s %s %s" % (self.nombre, self.tarea, self.direccion, self.estado)
 
