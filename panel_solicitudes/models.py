@@ -83,10 +83,8 @@ class Usuario(models.Model):
 
     #
     #
-    #
-    #
-    #
-class Fotos(models.Model):
+
+class Foto(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, blank=True, null=True)
     upload = models.FileField(upload_to=user_directory_path)
     def __str__(self):
@@ -94,7 +92,12 @@ class Fotos(models.Model):
         #return self.usuario.rut
  
 class PerfilMaestro(models.Model):
+
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, blank=True, null=True)
+    #   Creacion de la relacion de los perfiles de maestros a las tareas que pueden ejecutar
+    tareas = models.ManyToManyField(Tarea, on_delete=models.SET_NULL, blank=True, null=True)
+
     created_date = models.DateTimeField(
         default=timezone.now)
 
