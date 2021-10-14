@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 # Create your models here.
+from django.contrib.auth.models import User
 
 class Comuna(models.Model):
     nombre = models.TextField()
@@ -101,6 +102,8 @@ class PerfilMaestro(models.Model):
         return "%s %s %s" % (self.usuario.nombre, self.usuario.apellidos, self.usuario.rut)
 
 class SolicitudTarea(models.Model):
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    perfil_maestro = models.ForeignKey(PerfilMaestro, on_delete=models.CASCADE)
     nombre = models.TextField()
     tarea = models.TextField()
     descripcion = models.TextField()
