@@ -21,6 +21,8 @@ def registrar(request):
         form = UsuarioCreacionForm(request.POST)
         if form.is_valid():
             form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Cuenta fue creada' + user)
             return redirect('login')
 
     context = {'form': form}
@@ -53,7 +55,8 @@ def logout_usuario(request):
 
 # Pagina para listar los Maestros
 def maestros_lista(request):
-    return render(request, 'panel_solicitudes/templates/maestros_lista.html', {})
+    maestros = PerfilMaestro.objects.order_by('created_date')
+    return render(request, 'panel_solicitudes/templates/maestros_lista.html', {'maestros': maestros})
 
 
 def categorias_lista(request):

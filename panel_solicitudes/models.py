@@ -32,29 +32,16 @@ class Categoria(models.Model):
     descripcion = models.TextField()
 
     def __str__(self):
-        return self.nombre
+        return "%s %s %s" % (self.id, self.nombre, self.descripcion)
 
 
-    #   Unirlas a las categorias 
-    #   Unir las Tareas a Oficio
-    #   Crear Tareas
 class Tarea(models.Model):
     nombre = models.TextField()
     descripcion = models.TextField()
-
+    id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
     def __str__(self):
-        return self.nombre
+        return "%s %s %s %s" % (self.id, self.nombre, self.descripcion, self.id_categoria)
 
-    #   
-    #   Oficios es el Conjunto de las tareas que puede hacer un Maestro
-    #   Por lo tanto es creado por los Usuarios
-    #
-    """ class Oficio(models.Model):
-            nombre = models.TextField()
-
-            def __str__(self):
-                return self.nombre
-    """
 
 class Estado(models.Model):
     nombre = models.TextField()
@@ -95,6 +82,7 @@ class Foto(models.Model):
 class PerfilMaestro(models.Model):
 
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    #   EL CAMPO USUARIO PUEDE SER QUE ESTE DE MAS Y TIRANDO ERRORES
     usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, blank=True, null=True)
     #   Creacion de la relacion de los perfiles de maestros a las tareas que pueden ejecutar
     tareas = models.ManyToManyField(Tarea, blank=True)
