@@ -3,7 +3,23 @@
 
 {% block content %}
 
+    {% for maestro in maestros %} 
+        <div class="maestro">
 
+            <h2><a href="">Autor: {{ maestro.author }}</a></h2>
+            <p>Usuario: {{ maestro.usuario|linebreaksbr }}</p>
+
+            <h3>Tareas que puede realizar</h3>
+            
+            {% for col in maestro.tareas.all %}
+
+                <td>{{ col.nombre }}</td>
+
+            {% endfor %}
+
+            
+        </div>
+    {% endfor %}
 
 
 {% endblock %}
