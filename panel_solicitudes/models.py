@@ -55,8 +55,9 @@ def user_directory_path(instance, filename):
 
 
 class Usuario(models.Model):
-    nombre = models.TextField()
-    apellidos = models.TextField()
+    """nombre = models.TextField()
+    apellidos = models.TextField()"""
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     rut = models.TextField()
     fecha_nacimiento = models.DateField()
     direccion = models.TextField()
@@ -66,7 +67,7 @@ class Usuario(models.Model):
         default=timezone.now)
 
     def __str__(self):
-        return "%s %s %s %s" % (self.rut, self.nombre, self.apellidos, self.verificacion)
+        return "%s %s %s %s" % (self.rut, self.direccion, self.fecha_nacimiento, self.verificacion)
 
     #
     #
