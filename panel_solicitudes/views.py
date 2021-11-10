@@ -1,5 +1,5 @@
 from django.http import request
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.utils import timezone
 from .forms import *
@@ -53,13 +53,35 @@ def logout_usuario(request):
     return redirect('login')
 
 
-# Pagina para listar los Maestros
-def maestros_lista(request):
-    maestros = PerfilMaestro.objects.order_by('created_date')
-    return render(request, 'panel_solicitudes/templates/maestros_lista.html', {'maestros': maestros})
-
-
 def categorias_lista(request):
     categorias = Categoria.objects.order_by('nombre')
     return render(request, 'panel_solicitudes/templates/categorias_lista.html', {'categorias': categorias} )
 
+
+# Pagina para listar los Maestros
+def maestros_lista(request):
+    maestros = PerfilMaestro.objects.order_by('id')
+    return render(request, 'panel_solicitudes/templates/maestros_lista.html', {'maestros': maestros})
+
+
+def maestro_solicitudes(request, pk):
+    #perfil_maestro = get_object_or_404(PerfilMaestro, pk=pk)
+    #perfilmaestro = PerfilMaestro.objects.get('pk')
+
+    #solicitud = SolicitudTarea.objects.order_by('pk')
+    #solicitudes = SolicitudTarea.objects.get('pk')
+    
+
+
+    #AL PARECER QUEDO FUNCIONANDO BIEN EL FILTRADO
+    solicitudes = SolicitudTarea.objects.filter(perfil_maestro_id = pk)
+    #solicitudes = SolicitudTarea.objects.all().filter(perfil_maestro == request.pk)
+
+    
+    # ESTE FUNCIONA
+    #solicitudes = SolicitudTarea.objects.order_by('pk')
+    return render(request, 'maestro_solicitudes.html', {'solicitudes': solicitudes})
+
+def maestro_detalle(request, pk):
+    maestro = get_object_or_404(PerfilMaestro, pk=pk)
+    return render(request, 'maestro_detalle.html', {'maestro': maestro})

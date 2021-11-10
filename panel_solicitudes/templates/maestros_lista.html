@@ -6,8 +6,18 @@
     {% for maestro in maestros %} 
         <div class="maestro">
 
-            <h2><a href="">Autor: {{ maestro.author }}</a></h2>
-            <p>Usuario: {{ maestro.usuario|linebreaksbr }}</p>
+            <h2>Nombre de usuario: {{ maestro.author }}</h2>
+            <h3> <a href="{% url 'maestro_solicitudes' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>
+            <p>Rut: {{ maestro.usuario.rut|linebreaksbr }}</p>
+            <p>Fecha nacimiento: {{ maestro.usuario.fecha_nacimiento|linebreaksbr }}</p>
+            <p>Genero: {{ maestro.usuario.genero|linebreaksbr }}</p>
+            <p>Fecha de integracion: {{ maestro.usuario.created_date }}</p>
+
+            {% for col in maestro.usuario.all %}
+
+                <td>{{ col }}</td>
+
+            {% endfor %}
 
             <h3>Tareas que puede realizar</h3>
             

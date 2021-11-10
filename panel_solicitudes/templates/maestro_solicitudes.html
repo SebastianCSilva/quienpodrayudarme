@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    {% for solicitud in solicitudes %} 
+        <div class="maestro">
+
+            {{ solicitud.all }}
+            {{ solicitud }}
+            
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

@@ -55,8 +55,8 @@ def user_directory_path(instance, filename):
 
 
 class Usuario(models.Model):
-    """nombre = models.TextField()
-    apellidos = models.TextField()"""
+    nombre = models.TextField(default='Pepe')
+    apellidos = models.TextField(default='Perez')
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     rut = models.TextField()
     fecha_nacimiento = models.DateField()
@@ -67,7 +67,7 @@ class Usuario(models.Model):
         default=timezone.now)
 
     def __str__(self):
-        return "%s %s %s %s" % (self.rut, self.direccion, self.fecha_nacimiento, self.verificacion)
+        return "%s %s %s %s %s %s %s" % (self.rut, self.user.username, self.nombre, self.apellidos, self.direccion, self.fecha_nacimiento, self.verificacion)
 
     #
     #
@@ -92,7 +92,7 @@ class PerfilMaestro(models.Model):
         default=timezone.now)
 
     def __str__(self):
-        return "%s %s %s" % (self.usuario.nombre, self.usuario.apellidos, self.usuario.rut)
+        return "%s %s %s %s" % (self.usuario.user, self.usuario.nombre, self.usuario.apellidos, self.usuario.rut)
 
 class SolicitudTarea(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
