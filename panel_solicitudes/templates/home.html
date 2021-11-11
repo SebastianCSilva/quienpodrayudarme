@@ -1,6 +1,9 @@
-<h3>Imagina probar esto con un H3</h3>
+{% extends 'base.html' %}
 
 
+{% block content %}
+<div class="col-md-12" style='background-color: #EDFEFF'>
+    
     {{ request.user.id }} 
     {{ user.username }}
     {{ request.user }}
@@ -8,4 +11,7 @@
     {{ user.email }}
 
 
-<a href="{% url 'logout' %}">Cerrar sesion</a>
+    <a href="{% url 'logout' %}">Cerrar sesion</a>
+</div>
+{% endblock %}
+

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for solicitud_tarea in solicitud_tareas %}
+
+    <div class="">
+
+        <h1> Autor {{ solicitud_tarea.author }}</h1>
+        <h2> perfil_maestro {{ solicitud_tarea.perfil_maestro }}</h2>
+        <h3> nombre {{ solicitud_tarea.nombre }}</h3>
+        <p> tarea {{ solicitud_tarea.tarea }} </p>
+        <p> descripcion {{ solicitud_tarea.descripcion }} </p>
+        <p> direccion {{ solicitud_tarea.direccion }} </p>
+        <p> estado {{ solicitud_tarea.estado }} </p>
+        <p> created_date {{ solicitud_tarea.created_date }} </p>
+        <p> fecha {{ solicitud_tarea.fecha }} </p>
+
+    
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    {% endfor %}
+  
+{% endblock %}

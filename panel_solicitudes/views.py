@@ -1,3 +1,4 @@
+from django.db.models.fields import DateField
 from django.http import request
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
@@ -85,3 +86,62 @@ def maestro_solicitudes(request, pk):
 def maestro_detalle(request, pk):
     maestro = get_object_or_404(PerfilMaestro, pk=pk)
     return render(request, 'maestro_detalle.html', {'maestro': maestro})
+
+"""
+def solicitud_nueva(request):
+    if request.method == "POST":
+        form = Solicitud_Tarea_Form(request.POST)
+        if form.is_valid():
+            solicitud_tarea = form.save(commit=False)
+            #solicitud_tarea.request.user = user
+            solicitud_tarea.created_date = timezone.now()
+            solicitud_tarea.save()
+            return redirect('solicitud_detalle', pk=solicitud_tarea.pk)
+    else:
+        form = Solicitud_Tarea_Form()
+    return render(request, 'solicitud_editar.html', {'form': form})
+
+
+"""
+
+
+
+
+
+
+
+
+def solicitud_lista(request):
+    solicitud_tareas = SolicitudTarea.objects.order_by('id')
+    return render(request, 'solicitud_tareas.html', {'solicitud_tareas':solicitud_tareas})
+
+def solicitud_detalle(request, pk):
+    solicitud_tarea = get_object_or_404(SolicitudTarea, pk=pk)
+    return render(request, 'solicitud_detalle.html', {'solicitud_tarea': solicitud_tarea})
+
+def solicitud_nueva(request):
+    if request.method == "POST":
+        form = Solicitud_Tarea_Form(request.POST)
+        if form.is_valid():
+            solicitud_tarea = form.save(commit=False)
+            solicitud_tarea.author = request.user
+            solicitud_tarea.created_date = timezone.now()
+            solicitud_tarea.save()
+            return redirect('solicitud_detalle', pk=solicitud_tarea.pk)
+    else:
+        form = Solicitud_Tarea_Form()
+    return render(request, 'solicitud_editar.html', {'form': form})
+
+def solicitud_editar(request, pk):
+    post = get_object_or_404(SolicitudTarea, pk=pk)
+    if request.method == "POST":
+        form = Solicitud_Tarea_Form(request.POST, instance=post)
+        if form.is_valid():
+            solicitud_tarea = form.save(commit=False)
+            solicitud_tarea.author = request.user
+            solicitud_tarea.created_date = timezone.now()
+            solicitud_tarea.save()
+            return redirect('solicitud_detalle', pk=solicitud_tarea.pk)
+    else:
+        form = Solicitud_Tarea_Form(instance=post)
+    return render(request, 'solicitud_editar.html', {'form': form})

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="post">
+        
+        {% if user.is_authenticated %}
+        <!--
+        -->
+        {% endif %}        
+        <h1> {{ solicitud_tarea.perfil_maestro }} </h1>
+        <h2>{{ solicitud_tarea.nombre }}</h2>
+        <p>{{ solicitud_tarea.tarea }}</p>
+        <p>{{ solicitud_tarea.descripcion }}</p>
+        <p>{{ solicitud_tarea.direccion }}</p>
+        <p>{{ solicitud_tarea.estado }}</p>
+        <p>{{ solicitud_tarea.fecha }}</p>
+
+
+    </div>
+{% endblock %}
