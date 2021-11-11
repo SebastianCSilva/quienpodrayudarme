@@ -104,7 +104,7 @@ class SolicitudTarea(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
     created_date = models.DateTimeField(
         default=timezone.now)
-    fecha = models.DateTimeField()
+    fecha = models.DateField()
 
     def __str__(self):
         return "%s %s %s %s" % (self.nombre, self.tarea, self.direccion, self.estado)

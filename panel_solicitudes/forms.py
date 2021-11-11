@@ -20,5 +20,5 @@ class Solicitud_Tarea_Form(forms.ModelForm):
         model = SolicitudTarea
         fields = ('perfil_maestro', 'nombre', 'tarea', 'descripcion', 'direccion','estado','fecha')
         widgets = {
-            'fecha': DateInput(),
+            'fecha': DateInput(format=('%Y-%m-%d')),
         }
