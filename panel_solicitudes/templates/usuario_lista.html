@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for usuario in usuarios %}
+
+    <div class="col-md-3 col-md-4">
+
+        <div class="usuarios">
+            <h1><a href="{% url 'usuario_detalle' pk=usuario.pk %}" style="color:#008cff">Nombre: {{ usuario.nombre }}  {{ usuario.apellidos }}</a></h1>
+            <h3>Rut: {{ usuario.rut }}</h3>
+            <p>fecha_nacimiento: {{ usuario.fecha_nacimiento }} </p>
+            <p>direccion: {{ usuario.direccion }} </p>
+            <p>genero: {{ usuario.genero }} </p>
+            <p>verificacion: {{ usuario.verificacion }} </p>
+            <p>created_date {{ usuario.created_date }} </p>
+        </div>
+
+    </div>
+   
+    {% endfor %}
+  
+{% endblock %}

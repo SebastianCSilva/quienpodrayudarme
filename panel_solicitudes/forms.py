@@ -22,3 +22,11 @@ class Solicitud_Tarea_Form(forms.ModelForm):
         widgets = {
             'fecha': DateInput(format=('%Y-%m-%d')),
         }
+
+class UsuarioForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['nombre', 'apellidos', 'rut', 'fecha_nacimiento', 'direccion', 'genero']
+        widgets = {
+            'fecha_nacimiento': DateInput(format=('%Y-%m-%d')),
+        }

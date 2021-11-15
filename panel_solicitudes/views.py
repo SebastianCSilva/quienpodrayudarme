@@ -145,3 +145,48 @@ def solicitud_editar(request, pk):
     else:
         form = Solicitud_Tarea_Form(instance=post)
     return render(request, 'solicitud_editar.html', {'form': form})
+
+
+
+
+
+def usuario_lista(request):
+    usuarios = Usuario.objects.order_by('id')
+    return render(request, 'usuario_lista.html', {'usuarios':usuarios})
+
+def usuario_detalle(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    return render(request, 'usuario_detalle.html', {'usuario': usuario})
+
+
+
+
+def usuario_nueva(request):
+    if request.method == "POST":
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            usuario = form.save(commit=False)
+            usuario.user = request.user
+            usuario.created_date = timezone.now()
+            usuario.save()
+            return redirect('usuario_detalle', pk=usuario.pk)
+    else:
+        form = UsuarioForm()
+    return render(request, 'usuario_editar.html', {'form': form})
+
+
+def usuario_editar(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    if request.method == "POST":
+        form = UsuarioForm(request.POST, instance=usuario)
+        if form.is_valid():
+            usuario = form.save(commit=False)
+            usuario.user = request.user
+            usuario.created_date = timezone.now()
+            usuario.save()
+            return redirect('usuario_detalle', pk=usuario.pk)
+    else:
+        form = UsuarioForm(instance=usuario)
+    return render(request, 'usuario_editar.html', {'form': form})
+
+
