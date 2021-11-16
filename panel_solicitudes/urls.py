@@ -11,7 +11,12 @@ urlpatterns = [
     path('logout', views.logout_usuario, name='logout'),
     #
     path('maestros/', views.maestros_lista, name='maestros_lista'),
-    path('maestro/<int:pk>/', views.maestro_solicitudes, name='maestro_solicitudes'),
+    path('maestro_solicitudes/<int:pk>/', views.maestro_solicitudes, name='maestro_solicitudes'),
+    #
+    path('maestro/<int:pk>/', views.maestro_detalle, name='maestro_detalle'),
+    path('maestro/nueva', views.maestro_nueva, name='maestro_nueva'),
+    path('maestro/<int:pk>/editar/', views.maestro_editar, name='maestro_editar'),
+
     #path('maestros/<int:pk>/', views.maestro_solicitudes, name='maestro_solicitudes')
     #
     #path('maestro/<int:pk>/new', views.solicitud_nueva, name='solicitud_nueva'),
@@ -26,4 +31,6 @@ urlpatterns = [
     path('usuario/<int:pk>/', views.usuario_detalle, name='usuario_detalle'),
     path('usuario/nueva', views.usuario_nueva, name='usuario_nueva'),
     path('usuario/<int:pk>/editar/', views.usuario_editar, name='usuario_editar'),
+    #
+    
 ]

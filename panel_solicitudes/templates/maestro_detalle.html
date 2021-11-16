@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-md-3 col-md-4">
+        
+        <div class="usuarios">
+            {% if user.is_authenticated %}
+            <!--
+            -->
+            {% endif %}      
+            <!--  
+            <h1>Nombre: {{ usuario.nombre }}  {{ usuario.apellidos }}</h1>
+            <h3>Rut: {{ usuario.rut }}</h3>
+            <p>fecha_nacimiento: {{ usuario.fecha_nacimiento }} </p>
+            <p>direccion: {{ usuario.direccion }} </p>
+            <p>genero: {{ usuario.genero }} </p>
+            <p>verificacion: {{ usuario.verificacion }} </p>
+            <p>created_date {{ usuario.created_date }} </p>
+            -->
+            {{ maestro }}
+
+
+        </div>
+    </div>
+{% endblock %}

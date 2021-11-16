@@ -4,9 +4,10 @@
 {% block content %}
 
     {% for maestro in maestros %} 
+    <div class="col-md-3 col-md-4">
         <div class="maestro">
 
-            <h2>Nombre de usuario: {{ maestro.author }}</h2>
+            
             <h3> <a href="{% url 'maestro_solicitudes' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>
             <p>Rut: {{ maestro.usuario.rut|linebreaksbr }}</p>
             <p>Fecha nacimiento: {{ maestro.usuario.fecha_nacimiento|linebreaksbr }}</p>
@@ -29,6 +30,7 @@
 
             
         </div>
+    </div>
     {% endfor %}
 
 

@@ -4,13 +4,16 @@
 {% block content %}
 <div class="col-md-12" style='background-color: #EDFEFF'>
 
-    <div class="">
+    <div class="usuarios">
 
         <h2>Nueva Usuario</h2>
         {% if user.is_authenticated %}
-            <form method="POST" class="post-form">
+            <form method="POST" class="usuarios-form">
                 {% csrf_token %}
                 {{ form.as_table }}
+
+
+                
                 <button type="submit" class="save btn btn-default">Guardar</button>
             </form>
         {% endif %} 

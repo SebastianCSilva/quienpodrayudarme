@@ -87,22 +87,41 @@ def maestro_detalle(request, pk):
     maestro = get_object_or_404(PerfilMaestro, pk=pk)
     return render(request, 'maestro_detalle.html', {'maestro': maestro})
 
-"""
-def solicitud_nueva(request):
+def maestro_nueva(request):
     if request.method == "POST":
-        form = Solicitud_Tarea_Form(request.POST)
+        form = MaestroForm(request.POST)
+        # Con esto obtenemos todos los datos del usuario actual
+        mi_usuario = Usuario.objects.get(user=request.user)
         if form.is_valid():
-            solicitud_tarea = form.save(commit=False)
-            #solicitud_tarea.request.user = user
-            solicitud_tarea.created_date = timezone.now()
-            solicitud_tarea.save()
-            return redirect('solicitud_detalle', pk=solicitud_tarea.pk)
+            maestro = form.save(commit=False)
+            # Estas lineas de codigo pueden arreglar errores futuros
+            maestro.usuario = mi_usuario
+            maestro.created_date = timezone.now()
+            maestro.save()
+            form.save_m2m()
+            return redirect('maestro_detalle', pk=maestro.pk)
     else:
-        form = Solicitud_Tarea_Form()
-    return render(request, 'solicitud_editar.html', {'form': form})
+        form = MaestroForm()
+    return render(request, 'maestro_editar.html', {'form': form})
 
 
-"""
+def maestro_editar(request, pk):
+    maestro = get_object_or_404(PerfilMaestro, pk=pk)
+    if request.method == "POST":
+        form = MaestroForm(request.POST, instance=maestro)
+        # Con esto obtenemos todos los datos del usuario actual
+        mi_usuario = Usuario.objects.get(user=request.user)
+        if form.is_valid():
+            maestro = form.save(commit=False)
+            # Estas lineas de codigo pueden arreglar errores futuros
+            maestro.usuario = mi_usuario
+            maestro.created_date = timezone.now()
+            maestro.save()
+            form.save_m2m()
+            return redirect('maestro_detalle', pk=maestro.pk)
+    else:
+        form = MaestroForm(instance=maestro)
+    return render(request, 'maestro_editar.html', {'form': form})
 
 
 
@@ -157,9 +176,6 @@ def usuario_lista(request):
 def usuario_detalle(request, pk):
     usuario = get_object_or_404(Usuario, pk=pk)
     return render(request, 'usuario_detalle.html', {'usuario': usuario})
-
-
-
 
 def usuario_nueva(request):
     if request.method == "POST":

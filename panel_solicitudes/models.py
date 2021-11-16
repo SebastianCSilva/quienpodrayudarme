@@ -32,7 +32,7 @@ class Categoria(models.Model):
     descripcion = models.TextField()
 
     def __str__(self):
-        return "%s %s %s" % (self.id, self.nombre, self.descripcion)
+        return "%s %s" % (self.id, self.nombre)
 
 
 class Tarea(models.Model):
@@ -62,12 +62,12 @@ class Usuario(models.Model):
     fecha_nacimiento = models.DateField()
     direccion = models.TextField()
     genero = models.ForeignKey(Genero, on_delete=models.CASCADE)
-    verificacion = models.ForeignKey(Verificacion, on_delete=models.CASCADE)
+    verificacion = models.ForeignKey(Verificacion, on_delete=models.CASCADE, default=1)
     created_date = models.DateTimeField(
         default=timezone.now)
-
+    celular = models.TextField(default='+569 7777 7777')
     def __str__(self):
-        return "%s %s %s %s %s %s %s" % (self.rut, self.user.username, self.nombre, self.apellidos, self.direccion, self.fecha_nacimiento, self.verificacion)
+        return "%s %s %s %s %s %s %s %s" % (self.rut, self.user.username, self.nombre, self.apellidos, self.direccion, self.fecha_nacimiento, self.celular, self.verificacion)
 
     #
     #
@@ -82,17 +82,17 @@ class Foto(models.Model):
  
 class PerfilMaestro(models.Model):
 
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE, default=1)
     #   EL CAMPO USUARIO PUEDE SER QUE ESTE DE MAS Y TIRANDO ERRORES
     usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, blank=True, null=True)
     #   Creacion de la relacion de los perfiles de maestros a las tareas que pueden ejecutar
-    tareas = models.ManyToManyField(Tarea, blank=True)
+    tareas = models.ManyToManyField(Tarea)
 
     created_date = models.DateTimeField(
         default=timezone.now)
 
     def __str__(self):
-        return "%s %s %s %s" % (self.usuario.user, self.usuario.nombre, self.usuario.apellidos, self.usuario.rut)
+        return "%s %s %s" % (self.usuario, self.author, self.tareas)
 
 class SolicitudTarea(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -101,7 +101,7 @@ class SolicitudTarea(models.Model):
     tarea = models.TextField()
     descripcion = models.TextField()
     direccion = models.TextField()
-    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
+    estado = models.ForeignKey(Estado, on_delete=models.CASCADE, default=1)
     created_date = models.DateTimeField(
         default=timezone.now)
     fecha = models.DateField()

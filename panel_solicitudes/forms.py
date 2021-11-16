@@ -30,3 +30,13 @@ class UsuarioForm(forms.ModelForm):
         widgets = {
             'fecha_nacimiento': DateInput(format=('%Y-%m-%d')),
         }
+
+class MaestroForm(forms.ModelForm):
+    class Meta:
+        model = PerfilMaestro
+        fields = ['tareas']
+        
+    tareas = forms.ModelMultipleChoiceField(
+            queryset=Tarea.objects.all(),
+            widget=forms.CheckboxSelectMultiple
+    )
