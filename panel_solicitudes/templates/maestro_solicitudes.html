@@ -2,12 +2,23 @@
 
 {% block content %}
     
-    {% for solicitud in solicitudes %} 
-        <div class="maestro">
 
-            {{ solicitud.all }}
-            {{ solicitud }}
-            
+    <h1>Solicitudes del maestro</h1>
+    {% for solicitud in solicitudes %} 
+        <div class="col-6 col-md-4">
+            <div class="solicitud">
+                
+                <p>perfil_maestro: {{ solicitud.perfil_maestro }} </p>
+                <h2>nombre: {{ solicitud.nombre }} </h2>
+                <p>tarea: {{ solicitud.tarea }} </p>
+                <p>descripcion: {{ solicitud.descripcion }} </p>
+                <p>direccion: {{ solicitud.direccion }} </p>
+                <p>estado: {{ solicitud.estado }} </p>
+                <p>fecha para la tarea: {{ solicitud.fecha }} </p>
+                <p>Agendada dia: {{ solicitud.created_date }} </p>
+
+                
+            </div>
         </div>
     {% endfor %}
 

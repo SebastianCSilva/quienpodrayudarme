@@ -8,17 +8,27 @@
             <!--
             -->
             {% endif %}      
-            <!--  
-            <h1>Nombre: {{ usuario.nombre }}  {{ usuario.apellidos }}</h1>
-            <h3>Rut: {{ usuario.rut }}</h3>
-            <p>fecha_nacimiento: {{ usuario.fecha_nacimiento }} </p>
-            <p>direccion: {{ usuario.direccion }} </p>
-            <p>genero: {{ usuario.genero }} </p>
-            <p>verificacion: {{ usuario.verificacion }} </p>
-            <p>created_date {{ usuario.created_date }} </p>
-            -->
-            {{ maestro }}
+             
+            <h1>Nombre: {{ maestro.usuario.nombre }}  {{ maestro.usuario.apellidos }}</h1>
+            <h3>Rut: {{ maestro.usuario.rut }}</h3>
+            <p>fecha_nacimiento: {{ maestro.usuario.fecha_nacimiento }} </p>
+            <p>direccion: {{ maestro.usuario.direccion }} </p>
+            <p>genero: {{ maestro.usuario.genero }} </p>
+            <p>verificacion: {{ maestro.usuario.verificacion }} </p>
+            <p>created_date: {{ maestro.usuario.created_date }} </p>
+            <p>celular: {{ maestro.usuario.celular }} </p>
 
+            <h3>Tareas que puede realizar</h3>
+            
+            {% for col in maestro.tareas.all %}
+
+                <td>{{ col.nombre }}</td>
+
+            {% endfor %}
+
+            <!--
+            {{ maestro }}
+            -->
 
         </div>
     </div>

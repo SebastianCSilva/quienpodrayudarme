@@ -67,7 +67,7 @@ class Usuario(models.Model):
         default=timezone.now)
     celular = models.TextField(default='+569 7777 7777')
     def __str__(self):
-        return "%s %s %s %s %s %s %s %s" % (self.rut, self.user.username, self.nombre, self.apellidos, self.direccion, self.fecha_nacimiento, self.celular, self.verificacion)
+        return "%s %s %s %s %s %s %s" % (self.rut, self.user, self.nombre, self.apellidos, self.direccion, self.fecha_nacimiento, self.celular)
 
     #
     #
@@ -92,7 +92,7 @@ class PerfilMaestro(models.Model):
         default=timezone.now)
 
     def __str__(self):
-        return "%s %s %s" % (self.usuario, self.author, self.tareas)
+        return "%s %s" % (self.usuario, list(self.tareas.all()))
 
 class SolicitudTarea(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -107,6 +107,6 @@ class SolicitudTarea(models.Model):
     fecha = models.DateField()
 
     def __str__(self):
-        return "%s %s %s %s" % (self.nombre, self.tarea, self.direccion, self.estado)
+        return "%s %s %s %s %s" % (self.nombre, self.tarea, self.direccion, self.estado, self.perfil_maestro)
 
 
