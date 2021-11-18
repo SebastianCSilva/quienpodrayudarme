@@ -9,6 +9,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .decorators import *
+
 
 # Create your views here.
 # Pagina de Bienvenida para los usuarios nuevos
@@ -65,6 +68,9 @@ def maestros_lista(request):
     return render(request, 'panel_solicitudes/templates/maestros_lista.html', {'maestros': maestros})
 
 
+
+
+@login_required(login_url='/login')
 def maestro_solicitudes(request, pk):
     #perfil_maestro = get_object_or_404(PerfilMaestro, pk=pk)
     #perfilmaestro = PerfilMaestro.objects.get('pk')
@@ -83,10 +89,12 @@ def maestro_solicitudes(request, pk):
     #solicitudes = SolicitudTarea.objects.order_by('pk')
     return render(request, 'maestro_solicitudes.html', {'solicitudes': solicitudes})
 
+@login_required(login_url='/login')
 def maestro_detalle(request, pk):
     maestro = get_object_or_404(PerfilMaestro, pk=pk)
     return render(request, 'maestro_detalle.html', {'maestro': maestro})
 
+@login_required(login_url='/login')
 def maestro_nueva(request):
     if request.method == "POST":
         form = MaestroForm(request.POST)
@@ -96,6 +104,7 @@ def maestro_nueva(request):
             maestro = form.save(commit=False)
             # Estas lineas de codigo pueden arreglar errores futuros
             maestro.usuario = mi_usuario
+            maestro.author = mi_usuario
             maestro.created_date = timezone.now()
             maestro.save()
             form.save_m2m()
@@ -104,7 +113,8 @@ def maestro_nueva(request):
         form = MaestroForm()
     return render(request, 'maestro_editar.html', {'form': form})
 
-
+@login_required(login_url='/login')
+@user_is_master_author
 def maestro_editar(request, pk):
     maestro = get_object_or_404(PerfilMaestro, pk=pk)
     if request.method == "POST":
@@ -115,6 +125,7 @@ def maestro_editar(request, pk):
             maestro = form.save(commit=False)
             # Estas lineas de codigo pueden arreglar errores futuros
             maestro.usuario = mi_usuario
+            maestro.author = mi_usuario
             maestro.created_date = timezone.now()
             maestro.save()
             form.save_m2m()
@@ -129,21 +140,24 @@ def maestro_editar(request, pk):
 
 
 
-
+@login_required(login_url='/login')
 def solicitud_lista(request):
     solicitud_tareas = SolicitudTarea.objects.order_by('id')
     return render(request, 'solicitud_tareas.html', {'solicitud_tareas':solicitud_tareas})
 
+@login_required(login_url='/login')
 def solicitud_detalle(request, pk):
     solicitud_tarea = get_object_or_404(SolicitudTarea, pk=pk)
     return render(request, 'solicitud_detalle.html', {'solicitud_tarea': solicitud_tarea})
 
+@login_required(login_url='/login')
 def solicitud_nueva(request):
     if request.method == "POST":
         form = Solicitud_Tarea_Form(request.POST)
+        mi_usuario = Usuario.objects.get(user=request.user)
         if form.is_valid():
             solicitud_tarea = form.save(commit=False)
-            solicitud_tarea.author = request.user
+            solicitud_tarea.author = mi_usuario
             solicitud_tarea.created_date = timezone.now()
             solicitud_tarea.save()
             return redirect('solicitud_detalle', pk=solicitud_tarea.pk)
@@ -151,13 +165,16 @@ def solicitud_nueva(request):
         form = Solicitud_Tarea_Form()
     return render(request, 'solicitud_editar.html', {'form': form})
 
+@login_required(login_url='/login')
+@user_is_solicitud_author
 def solicitud_editar(request, pk):
     post = get_object_or_404(SolicitudTarea, pk=pk)
     if request.method == "POST":
         form = Solicitud_Tarea_Form(request.POST, instance=post)
+        mi_usuario = Usuario.objects.get(user=request.user)
         if form.is_valid():
             solicitud_tarea = form.save(commit=False)
-            solicitud_tarea.author = request.user
+            solicitud_tarea.author = mi_usuario
             solicitud_tarea.created_date = timezone.now()
             solicitud_tarea.save()
             return redirect('solicitud_detalle', pk=solicitud_tarea.pk)
@@ -168,21 +185,26 @@ def solicitud_editar(request, pk):
 
 
 
-
+@login_required(login_url='/login')
 def usuario_lista(request):
     usuarios = Usuario.objects.order_by('id')
     return render(request, 'usuario_lista.html', {'usuarios':usuarios})
 
+@login_required(login_url='/login')
+@user_is_entry_author
 def usuario_detalle(request, pk):
     usuario = get_object_or_404(Usuario, pk=pk)
     return render(request, 'usuario_detalle.html', {'usuario': usuario})
 
+@login_required(login_url='/login')
 def usuario_nueva(request):
     if request.method == "POST":
         form = UsuarioForm(request.POST)
+        mi_usuario = Usuario.objects.get(user=request.user)
         if form.is_valid():
             usuario = form.save(commit=False)
-            usuario.user = request.user
+            usuario.user = mi_usuario
+            usuario.author = mi_usuario
             usuario.created_date = timezone.now()
             usuario.save()
             return redirect('usuario_detalle', pk=usuario.pk)
@@ -190,14 +212,17 @@ def usuario_nueva(request):
         form = UsuarioForm()
     return render(request, 'usuario_editar.html', {'form': form})
 
-
+@login_required(login_url='/login')
+@user_is_entry_author
 def usuario_editar(request, pk):
     usuario = get_object_or_404(Usuario, pk=pk)
     if request.method == "POST":
         form = UsuarioForm(request.POST, instance=usuario)
+        mi_usuario = Usuario.objects.get(user=request.user)
         if form.is_valid():
             usuario = form.save(commit=False)
-            usuario.user = request.user
+            usuario.user = mi_usuario
+            usuario.author = mi_usuario
             usuario.created_date = timezone.now()
             usuario.save()
             return redirect('usuario_detalle', pk=usuario.pk)
