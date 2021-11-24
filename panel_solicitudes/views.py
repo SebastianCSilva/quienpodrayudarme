@@ -99,12 +99,14 @@ def maestro_nueva(request):
     if request.method == "POST":
         form = MaestroForm(request.POST)
         # Con esto obtenemos todos los datos del usuario actual
+        # mi_usuario = User.objects.get(id=request.user.id)
         mi_usuario = Usuario.objects.get(user=request.user)
+        mi_usuario2 = User.objects.get(id=request.user.id)
         if form.is_valid():
             maestro = form.save(commit=False)
             # Estas lineas de codigo pueden arreglar errores futuros
             maestro.usuario = mi_usuario
-            maestro.author = mi_usuario
+            maestro.author = mi_usuario2
             maestro.created_date = timezone.now()
             maestro.save()
             form.save_m2m()
@@ -154,7 +156,9 @@ def solicitud_detalle(request, pk):
 def solicitud_nueva(request):
     if request.method == "POST":
         form = Solicitud_Tarea_Form(request.POST)
-        mi_usuario = Usuario.objects.get(user=request.user)
+        # mi_usuario = Usuario.objects.get(user=request.user)
+        # mi_usuario2 = User.objects.get(id=request.user.id)
+        mi_usuario = User.objects.get(id=request.user.id)
         if form.is_valid():
             solicitud_tarea = form.save(commit=False)
             solicitud_tarea.author = mi_usuario
@@ -200,11 +204,11 @@ def usuario_detalle(request, pk):
 def usuario_nueva(request):
     if request.method == "POST":
         form = UsuarioForm(request.POST)
-        mi_usuario = Usuario.objects.get(user=request.user)
+        mi_usuario = User.objects.get(id=request.user.id)
         if form.is_valid():
             usuario = form.save(commit=False)
             usuario.user = mi_usuario
-            usuario.author = mi_usuario
+            #usuario.author = mi_usuario
             usuario.created_date = timezone.now()
             usuario.save()
             return redirect('usuario_detalle', pk=usuario.pk)
@@ -231,3 +235,27 @@ def usuario_editar(request, pk):
     return render(request, 'usuario_editar.html', {'form': form})
 
 
+
+
+        # mi_usuario = Usuario.objects.get(user=request.user)
+        # mi_usuario2 = User.objects.get(id=request.user.id)
+
+@login_required(login_url='/login')
+def mis_usuarios(request):
+    #mi_usuario = Usuario.objects.get(user=request.user)
+    usuarios = Usuario.objects.filter(user_id = request.user.id)
+    return render(request, 'mis_usuarios.html', {'usuarios':usuarios})
+    
+
+@login_required(login_url='/login')
+def mis_maestros(request):
+    maestros = PerfilMaestro.objects.filter(author_id = request.user.id)
+    return render(request, 'mis_maestros.html', {'maestros':maestros})
+
+    
+@login_required(login_url='/login')
+def mis_solcitudes(request):
+    
+    solicitudes = SolicitudTarea.objects.filter(author_id = request.user.id)
+
+    return render(request, 'mis_solcitudes.html', {'solicitudes':solicitudes})

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div >
+    {% for solicitud in solicitudes %}
+    <div class="col-xs-12 col-sm-6 col-md-8 col-xl-3" style='background-color: #EDFEFF' align="">
+
+        <div class="usuarios row align-items-center">
+            
+           
+          
+
+            <h1>Nombre de usuario:  {{ solicitud.author }}</h1>
+            <h2> perfil_maestro {{ solicitud.perfil_maestro }}</h2>
+            <h3> nombre {{ solicitud.nombre }}</h3>
+            <p> tarea {{ solicitud.tarea }} </p>
+            <p> descripcion {{ solicitud.descripcion }} </p>
+            <p> direccion {{ solicitud.direccion }} </p>
+            <p> estado {{ solicitud.estado }} </p>
+            <p> created_date {{ solicitud.created_date }} </p>
+            <p> fecha {{ solicitud.fecha }} </p>
+
+
+
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

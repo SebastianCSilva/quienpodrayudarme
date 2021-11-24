@@ -4,12 +4,12 @@
 {% block content %}
 <div class="col-md-12" style='background-color: #EDFEFF'>
 
-    <div class="post">
+    <div class="tareas">
 
         <h2>Nuevo Maestro</h2>
 
         {% if user.is_authenticated %}
-        <form method="POST" class="post-form">{% csrf_token %}
+        <form method="POST" class="tareas-form">{% csrf_token %}
             {{ form.as_table }}
             <button type="submit" class="save btn btn-default">Guardar</button>
         </form>

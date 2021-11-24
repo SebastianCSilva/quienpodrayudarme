@@ -1,5 +1,7 @@
 from django.core.exceptions import PermissionDenied
 from .models import *
+from django.shortcuts import get_object_or_404
+
 
 def user_is_entry_author(function):
     def wrap(request, *args, **kwargs):
@@ -29,6 +31,18 @@ def user_is_master_author(function):
 def user_is_solicitud_author(function):
     def wrap(request, *args, **kwargs):
 
+        solicitud = SolicitudTarea.objects.get(pk=kwargs['pk'])
+        if solicitud.author == request.user:
+            return function(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
+
+def user_has_usuario(function):
+    def wrap(request, *args, **kwargs):
+        usuario = get_object_or_404(Usuario, pk=pk)
         solicitud = SolicitudTarea.objects.get(pk=kwargs['pk'])
         if solicitud.author == request.user:
             return function(request, *args, **kwargs)

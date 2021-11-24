@@ -31,6 +31,8 @@ urlpatterns = [
     path('usuario/<int:pk>/', views.usuario_detalle, name='usuario_detalle'),
     path('usuario/nueva', views.usuario_nueva, name='usuario_nueva'),
     path('usuario/<int:pk>/editar/', views.usuario_editar, name='usuario_editar'),
-    #
-    
+    # Urls personales para usuarios
+    path('mis-usuarios/', views.mis_usuarios, name='mis_usuarios'),
+    path('mis-maestros/', views.mis_maestros, name='mis_maestros'),
+    path('mis-solicitudes/', views.mis_solcitudes, name='mis_solcitudes'),
 ]

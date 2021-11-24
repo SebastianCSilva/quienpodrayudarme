@@ -2,13 +2,14 @@
 
 
 {% block content %}
+<div >
+    {% for maestro in maestros %}
+    <div class="col-xs-12 col-sm-6 col-md-8 col-xl-3" style='background-color: #EDFEFF' align="">
 
-    {% for maestro in maestros %} 
-    <div class="col-xs-12 col-sm-6 col-md-3">
-        <div class="maestro">
-
+        <div class="usuarios row align-items-center">
             
-            <h3> <a href="{% url 'maestro_solicitudes' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>
+           
+           <h3> <a href="{% url 'maestro_solicitudes' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>
             <p>Rut: {{ maestro.usuario.rut|linebreaksbr }}</p>
             <p>Celular: {{ maestro.usuario.celular }}</p>
             <p>Fecha nacimiento: {{ maestro.usuario.fecha_nacimiento|linebreaksbr }}</p>
@@ -25,10 +26,9 @@
 
             {% endfor %}
 
-            
         </div>
+
     </div>
     {% endfor %}
-
-
+</div>
 {% endblock %}

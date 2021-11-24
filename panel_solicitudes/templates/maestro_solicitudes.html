@@ -2,15 +2,17 @@
 
 {% block content %}
     
-
+    
     <h1>Solicitudes del maestro</h1>
     {% for solicitud in solicitudes %} 
         <div class="col-6 col-md-4">
             <div class="solicitud">
-                
+                <!--
                 <p>perfil_maestro: {{ solicitud.perfil_maestro }} </p>
-                <h2>nombre: {{ solicitud.nombre }} </h2>
-                <p>tarea: {{ solicitud.tarea }} </p>
+
+                -->
+                <h2>Nombre del trabajo: {{ solicitud.nombre }} </h2>
+                <p>Tarea que se tienen que realizar: {{ solicitud.tarea }} </p>
                 <p>descripcion: {{ solicitud.descripcion }} </p>
                 <p>direccion: {{ solicitud.direccion }} </p>
                 <p>estado: {{ solicitud.estado }} </p>

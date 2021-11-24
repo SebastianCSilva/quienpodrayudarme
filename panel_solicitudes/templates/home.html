@@ -2,8 +2,38 @@
 
 
 {% block content %}
-<div class="col-md-12" style='background-color: #EDFEFF'>
+<div class="col-md-12">
     
+    <div>        
+        <p>*Recuerda Completar tu perfil de Usuario antes de utilizar el sistema</p>
+        
+    </div>
+
+    <div>
+        <a href="/usuario/nueva">
+        <button type="button" class="btn btn-primary btn-lg btn-block">Completar Perfil Usuario</button>
+        </a>
+
+    </div>
+    <div align="center">
+        <a href="/solicitud/nueva" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Crear Solicitud Rapida</a>
+
+        <a href="/maestro/nueva" class="btn btn-second btn-lg active" role="button" aria-pressed="true">Agregar Perfil Maestro</a>
+
+
+        <div>
+            <button type="button" class="btn btn-secondary btn-lg">Mis Tareas Solicitadas</button>
+            <button type="button" class="btn btn-secondary btn-lg">Mis Perfiles Maestro</button>
+            <button type="button" class="btn btn-secondary btn-lg">Mis Perfiles usuario</button>
+            
+        </div>
+    </div>
+    
+
+    
+
+
+
     {{ request.user.id }} 
     {{ user.username }}
     {{ request.user }}

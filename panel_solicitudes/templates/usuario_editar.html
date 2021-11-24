@@ -2,23 +2,24 @@
 
 
 {% block content %}
-<div class="col-md-12" style='background-color: #EDFEFF'>
+<div >
+    <div class="col-xs-12 col-sm-6 col-md-8 col-xl-3" style='background-color: #EDFEFF' align="">
 
-    <div class="usuarios">
+        <div class="usuarios row align-items-center">
 
-        <h2>Nueva Usuario</h2>
-        {% if user.is_authenticated %}
-            <form method="POST" class="usuarios-form">
-                {% csrf_token %}
-                {{ form.as_table }}
+            <h2>Nueva Usuario</h2>
+            {% if user.is_authenticated %}
+                <form method="POST" class="usuarios-form">
+                    {% csrf_token %}
+                    
+                    {{ form.as_table }}
 
+                    <button type="submit" class="save btn btn-default">Guardar</button>
+                </form>
+            {% endif %} 
 
-                
-                <button type="submit" class="save btn btn-default">Guardar</button>
-            </form>
-        {% endif %} 
+        </div>
 
     </div>
-
 </div>
 {% endblock %}
