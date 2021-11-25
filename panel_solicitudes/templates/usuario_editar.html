@@ -3,13 +3,13 @@
 
 {% block content %}
 <div >
-    <div class="col-xs-12 col-sm-6 col-md-8 col-xl-3" style='background-color: #EDFEFF' align="">
+    <div class="col-xs-12 col-sm-6 col-md-8" style='background-color: #EDFEFF' align="">
 
-        <div class="usuarios row align-items-center">
+        <div class="usuarios">
 
             <h2>Nueva Usuario</h2>
             {% if user.is_authenticated %}
-                <form method="POST" class="usuarios-form">
+                <form method="POST" class="post-form">
                     {% csrf_token %}
                     
                     {{ form.as_table }}

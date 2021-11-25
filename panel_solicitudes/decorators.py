@@ -42,12 +42,16 @@ def user_is_solicitud_author(function):
 
 def user_has_usuario(function):
     def wrap(request, *args, **kwargs):
-        usuario = get_object_or_404(Usuario, pk=pk)
-        solicitud = SolicitudTarea.objects.get(pk=kwargs['pk'])
-        if solicitud.author == request.user:
-            return function(request, *args, **kwargs)
-        else:
+        #usuario = get_object_or_404(Usuario, pk=pk)
+        mi_usuario = User.objects.get(id=request.user.id)
+        usuario = Usuario.objects.get(pk=kwargs['mi_usuario'])
+        
+        if Usuario.objects.get(user=request.mi_usuario).exists():
+            #return function(request, *args, **kwargs)
             raise PermissionDenied
+        else:
+            #raise PermissionDenied
+            return function(request, *args, **kwargs)
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
     return wrap
