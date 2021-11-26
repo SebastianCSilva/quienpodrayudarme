@@ -16,14 +16,14 @@
         <!--                post.comments.all
         -->
             <hr>            
-            {% for comentario in solicitud.comentariossolicitud.all %}
+            {% for comentario in solicitud_tarea.comentariossolicitud.all %}
                 <div class="comment">
                     <div class="date">{{ comentario.created_date }}</div>
                     <strong>{{ comentario.author }}</strong>
                     <p>{{ comentario.text|linebreaks }}</p>
                 </div>
             {% empty %}
-                <p>No Comentarios aqui aun </p>
+                <p>No existen Comentarios aqui aun </p>
             {% endfor %}                                
             <!--
                 Cuidado con el solicitud_tarea de abajo
