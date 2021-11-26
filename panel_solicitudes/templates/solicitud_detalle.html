@@ -3,17 +3,34 @@
 {% block content %}
     <div class="post">
         
+           
+        <h1>Perfil de maestro: {{ solicitud_tarea.perfil_maestro }} </h1>
+        <h2>Nombre: {{ solicitud_tarea.nombre }}</h2>
+        <p>Tarea: {{ solicitud_tarea.tarea }}</p>
+        <p>Descripcion de tarea: {{ solicitud_tarea.descripcion }}</p>
+        <p>Direccion de solicitud:{{ solicitud_tarea.direccion }}</p>
+        <p>Estado de la tarea: {{ solicitud_tarea.estado }}</p>
+        <p><b>Fecha solicitada: {{ solicitud_tarea.fecha |date:"M d, Y" }}</p>
+
         {% if user.is_authenticated %}
-        <!--
+        <!--                post.comments.all
         -->
-        {% endif %}        
-        <h1> {{ solicitud_tarea.perfil_maestro }} </h1>
-        <h2>{{ solicitud_tarea.nombre }}</h2>
-        <p>{{ solicitud_tarea.tarea }}</p>
-        <p>{{ solicitud_tarea.descripcion }}</p>
-        <p>{{ solicitud_tarea.direccion }}</p>
-        <p>{{ solicitud_tarea.estado }}</p>
-        <p>{{ solicitud_tarea.fecha |date:"M d, Y" }}</p>
+            <hr>            
+            {% for comentario in solicitud.comentariossolicitud.all %}
+                <div class="comment">
+                    <div class="date">{{ comentario.created_date }}</div>
+                    <strong>{{ comentario.author }}</strong>
+                    <p>{{ comentario.text|linebreaks }}</p>
+                </div>
+            {% empty %}
+                <p>No Comentarios aqui aun </p>
+            {% endfor %}                                
+            <!--
+                Cuidado con el solicitud_tarea de abajo
+            -->
+            <a class="btn btn-default" href="{% url 'agregar_comentario_solicitud' pk=solicitud_tarea.pk %}">Agregar Comentario</a>
+
+        {% endif %}     
 
 
     </div>

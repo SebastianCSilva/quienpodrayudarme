@@ -35,4 +35,7 @@ urlpatterns = [
     path('mis-usuarios/', views.mis_usuarios, name='mis_usuarios'),
     path('mis-maestros/', views.mis_maestros, name='mis_maestros'),
     path('mis-solicitudes/', views.mis_solcitudes, name='mis_solcitudes'),
+    # 
+    # url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
+    path('solicitud/<int:pk>/comentariossolicitud/', views.agregar_comentario_solicitud, name='agregar_comentario_solicitud'),
 ]

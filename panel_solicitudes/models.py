@@ -110,3 +110,16 @@ class SolicitudTarea(models.Model):
         return "%s %s %s %s %s" % (self.nombre, self.tarea, self.direccion, self.estado, self.perfil_maestro)
 
 
+class ComentarioSolicitud(models.Model):
+    #                              panel_solicitudes.SolicitudTarea
+    solicitud = models.ForeignKey('SolicitudTarea', on_delete=models.CASCADE, related_name='comentariossolicitud')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, default=1)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+    
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+    def __str__(self):
+        return self.text

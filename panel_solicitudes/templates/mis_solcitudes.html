@@ -9,18 +9,25 @@
         <div class="usuarios row align-items-center">
             
            
-          
+           
 
             <h1>Nombre de usuario:  {{ solicitud.author }}</h1>
             <h2> perfil_maestro {{ solicitud.perfil_maestro }}</h2>
-            <h3> nombre {{ solicitud.nombre }}</h3>
-            <p> tarea {{ solicitud.tarea }} </p>
-            <p> descripcion {{ solicitud.descripcion }} </p>
-            <p> direccion {{ solicitud.direccion }} </p>
-            <p> estado {{ solicitud.estado }} </p>
-            <p> created_date {{ solicitud.created_date }} </p>
-            <p> fecha {{ solicitud.fecha }} </p>
+            <!--
+                Esta funcionando esta linea 
+                solicitud_detalle es la funcion que fue producida en al View
 
+            -->
+            <h3> <a href="{% url 'solicitud_detalle' pk=solicitud.pk %}"> Nombre: {{ solicitud.nombre }}</a></h3>
+
+            <p> Tarea: {{ solicitud.tarea }} </p>
+            <p> Descripcion: {{ solicitud.descripcion }} </p>
+            <p> Direccion: {{ solicitud.direccion }} </p>
+            <p> Estado: {{ solicitud.estado }} </p>
+            <p> Fecha de creacion: {{ solicitud.created_date }} </p>
+            <p><b> Fecha solicitada: {{ solicitud.fecha }} </p>
+
+            <a href="{% url 'solicitud_detalle' pk=solicitud.pk %}">Comentarios: {{ solicitud.comentariossolicitud.count }}</a>
 
 
         </div>

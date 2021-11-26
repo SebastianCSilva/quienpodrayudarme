@@ -40,3 +40,8 @@ class MaestroForm(forms.ModelForm):
             queryset=Tarea.objects.all(),
             widget=forms.CheckboxSelectMultiple
     )
+
+class ComentarioSolicitudForm(forms.ModelForm):
+    class Meta:
+        model = ComentarioSolicitud
+        fields = ['text']

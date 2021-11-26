@@ -259,3 +259,17 @@ def mis_solcitudes(request):
     solicitudes = SolicitudTarea.objects.filter(author_id = request.user.id)
 
     return render(request, 'mis_solcitudes.html', {'solicitudes':solicitudes})
+
+
+def agregar_comentario_solicitud(request, pk):
+    solicitud = get_object_or_404(SolicitudTarea, pk=pk)
+    if request.method == "POST":
+        form = ComentarioSolicitudForm(request.POST)
+        if form.is_valid():
+            comentariossolicitud = form.save(commit=False)
+            comentariossolicitud.solicitud = solicitud
+            comentariossolicitud.save()
+            return redirect('solicitud_detalle', pk=solicitud.pk)
+    else:
+        form = ComentarioSolicitudForm()
+    return render(request, 'agregar_comentario_solicitud.html', {'form': form})
