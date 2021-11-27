@@ -123,3 +123,17 @@ class ComentarioSolicitud(models.Model):
         self.save()
     def __str__(self):
         return self.text
+
+class ComentarioMaestro(models.Model):
+    #                              panel_solicitudes.PerfilMaestro
+    maestro = models.ForeignKey('PerfilMaestro', on_delete=models.CASCADE, related_name='comentariosmaestro')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, default=1)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+    
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+    def __str__(self):
+        return self.text

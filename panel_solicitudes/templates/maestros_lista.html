@@ -9,7 +9,11 @@
 
             
             <h3> <a href="{% url 'maestro_solicitudes' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>
-            <p>Rut: {{ maestro.usuario.rut|linebreaksbr }}</p>
+            <!--
+                Arriba para conectar a las solicitudes filtradas de los maestros
+                Abajo para enctrar a el detalle de los maestros
+            -->
+            <p><a href="{% url 'maestro_detalle' pk=maestro.pk %}">Rut: {{ maestro.usuario.rut|linebreaksbr }}</a></p>
             <p>Celular: {{ maestro.usuario.celular }}</p>
             <p>Fecha nacimiento: {{ maestro.usuario.fecha_nacimiento|linebreaksbr }}</p>
             <p>Genero: {{ maestro.usuario.genero|linebreaksbr }}</p>
@@ -24,6 +28,11 @@
                 <td>{{ col.nombre }}</td>
 
             {% endfor %}
+
+            <hr>
+            <a href="{% url 'maestro_detalle' pk=maestro.pk %}">Comentarios: {{ maestro.comentariosmaestro.count }}</a>
+
+            
 
             
         </div>

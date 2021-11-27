@@ -26,9 +26,24 @@
 
             {% endfor %}
 
+            {% if user.is_authenticated %}
+        <!--                post.comments.all       maestro
+        -->
+            <hr>            
+            {% for comentario in maestro.comentariosmaestro.all %}
+                <div class="comment">
+                    <div class="date">Fecha: {{ comentario.created_date }}</div>
+                    <strong>Apodo: {{ comentario.author }}</strong>
+                    <p>Comentario: {{ comentario.text|linebreaks }}</p>
+                </div>
+            {% empty %}
+                <p>No existen Comentarios aqui aun </p>
+            {% endfor %}                                
             <!--
-            {{ maestro }}
+                Cuidado con el solicitud_tarea de abajo
             -->
+            <a class="btn btn-default" href="{% url 'agregar_comentario_maestro' pk=maestro.pk %}">Agregar Comentario</a>
+        {% endif %}
 
         </div>
     </div>

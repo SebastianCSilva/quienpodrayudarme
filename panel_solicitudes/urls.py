@@ -38,4 +38,6 @@ urlpatterns = [
     # 
     # url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
     path('solicitud/<int:pk>/comentariossolicitud/', views.agregar_comentario_solicitud, name='agregar_comentario_solicitud'),
+    path('maestro/<int:pk>/comentariosmaestro/', views.agregar_comentario_maestro, name='agregar_comentario_maestro'),
+
 ]

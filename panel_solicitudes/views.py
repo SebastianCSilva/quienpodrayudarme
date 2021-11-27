@@ -273,3 +273,16 @@ def agregar_comentario_solicitud(request, pk):
     else:
         form = ComentarioSolicitudForm()
     return render(request, 'agregar_comentario_solicitud.html', {'form': form})
+
+def agregar_comentario_maestro(request, pk):
+    maestro = get_object_or_404(PerfilMaestro, pk=pk)
+    if request.method == "POST":
+        form = ComentarioMaestroForm(request.POST)
+        if form.is_valid():
+            comentariosmaestro = form.save(commit=False)
+            comentariosmaestro.maestro = maestro
+            comentariosmaestro.save()
+            return redirect('maestro_detalle', pk=maestro.pk)
+    else:
+        form = ComentarioSolicitudForm()
+    return render(request, 'agregar_comentario_maestro.html', {'form': form})

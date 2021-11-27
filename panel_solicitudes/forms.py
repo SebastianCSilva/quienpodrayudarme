@@ -45,3 +45,8 @@ class ComentarioSolicitudForm(forms.ModelForm):
     class Meta:
         model = ComentarioSolicitud
         fields = ['text']
+
+class ComentarioMaestroForm(forms.ModelForm):
+    class Meta:
+        model = ComentarioMaestro
+        fields = ['text']

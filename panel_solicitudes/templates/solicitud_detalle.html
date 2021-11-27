@@ -18,9 +18,9 @@
             <hr>            
             {% for comentario in solicitud_tarea.comentariossolicitud.all %}
                 <div class="comment">
-                    <div class="date">{{ comentario.created_date }}</div>
-                    <strong>{{ comentario.author }}</strong>
-                    <p>{{ comentario.text|linebreaks }}</p>
+                    <div class="date">Fecha: {{ comentario.created_date }}</div>
+                    <strong>Apodo: {{ comentario.author }}</strong>
+                    <p>Comentario: {{ comentario.text|linebreaks }}</p>
                 </div>
             {% empty %}
                 <p>No existen Comentarios aqui aun </p>
