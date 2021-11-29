@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="col-md-3 col-md-4">
+    <div class="col-md-8">
         
         <div class="usuarios">
             {% if user.is_authenticated %}
             <!--
             -->
+            <a href="{% url 'agregar_solicitud_nueva' pk=maestro.pk %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Crear Solicitud de Tarea</a>
+
             {% endif %}      
              
             <h1>Nombre: {{ maestro.usuario.nombre }}  {{ maestro.usuario.apellidos }}</h1>
             <h3>Rut: {{ maestro.usuario.rut }}</h3>
-            <p>fecha_nacimiento: {{ maestro.usuario.fecha_nacimiento }} </p>
-            <p>direccion: {{ maestro.usuario.direccion }} </p>
-            <p>genero: {{ maestro.usuario.genero }} </p>
-            <p>verificacion: {{ maestro.usuario.verificacion }} </p>
-            <p>created_date: {{ maestro.usuario.created_date }} </p>
-            <p>celular: {{ maestro.usuario.celular }} </p>
+            <p>Fecha de nacimiento: {{ maestro.usuario.fecha_nacimiento }} </p>
+            <p>Direccion: {{ maestro.usuario.direccion }} </p>
+            <p>Genero: {{ maestro.usuario.genero }} </p>
+            <p>Verificacion: {{ maestro.usuario.verificacion }} </p>
+            <p>Fecha de integracion: {{ maestro.usuario.created_date }} </p>
+            <p>Celular: {{ maestro.usuario.celular }} </p>
 
             <h3>Tareas que puede realizar</h3>
             

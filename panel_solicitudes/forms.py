@@ -50,3 +50,12 @@ class ComentarioMaestroForm(forms.ModelForm):
     class Meta:
         model = ComentarioMaestro
         fields = ['text']
+
+class Solicitud_Maestro_Tarea_Form(forms.ModelForm):
+    class Meta:
+        model = SolicitudTarea
+        fields = ['nombre', 'tarea', 'descripcion', 'direccion', 'estado','fecha']
+        widgets = {
+            'fecha': DateInput(format=('%Y-%m-%d')),
+        }
+

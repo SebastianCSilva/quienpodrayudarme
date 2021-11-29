@@ -286,3 +286,20 @@ def agregar_comentario_maestro(request, pk):
     else:
         form = ComentarioSolicitudForm()
     return render(request, 'agregar_comentario_maestro.html', {'form': form})
+
+@login_required(login_url='/login')
+def agregar_solicitud_nueva(request, pk):
+    maestro = get_object_or_404(PerfilMaestro, pk=pk)
+    if request.method == "POST":
+        form = Solicitud_Maestro_Tarea_Form(request.POST)
+        mi_usuario = User.objects.get(id=request.user.id)
+        if form.is_valid():
+            solicitud_tarea = form.save(commit=False)
+            solicitud_tarea.author = mi_usuario
+            solicitud_tarea.perfil_maestro = maestro
+            solicitud_tarea.created_date = timezone.now()
+            solicitud_tarea.save()
+            return redirect('solicitud_detalle', pk=solicitud_tarea.pk)
+    else:
+        form = Solicitud_Maestro_Tarea_Form()
+    return render(request, 'agregar_solicitud_nueva.html', {'form': form})

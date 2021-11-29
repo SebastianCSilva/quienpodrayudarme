@@ -7,11 +7,14 @@
     <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="maestro">
 
-            
-            <h3> <a href="{% url 'maestro_solicitudes' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>
+            <a href="{% url 'maestro_detalle' pk=maestro.pk %}">Solicitudes Coordinadas: {{ maestro.solicitudtarea.count }}</a>
+            <h3> <a href="{% url 'maestro_detalle' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>
+        
             <!--
+                {% url 'maestro_solicitudes' pk=maestro.pk %}
                 Arriba para conectar a las solicitudes filtradas de los maestros
                 Abajo para enctrar a el detalle de los maestros
+                {% url 'maestro_detalle' pk=maestro.pk %}
             -->
             <p><a href="{% url 'maestro_detalle' pk=maestro.pk %}">Rut: {{ maestro.usuario.rut|linebreaksbr }}</a></p>
             <p>Celular: {{ maestro.usuario.celular }}</p>
@@ -31,9 +34,8 @@
 
             <hr>
             <a href="{% url 'maestro_detalle' pk=maestro.pk %}">Comentarios: {{ maestro.comentariosmaestro.count }}</a>
-
-            
-
+            <hr>
+            <a href="{% url 'maestro_solicitudes' pk=maestro.pk %}" class="btn btn-second btn-lg active" role="button" aria-pressed="true">Filtrar las solicitudes</a>
             
         </div>
     </div>

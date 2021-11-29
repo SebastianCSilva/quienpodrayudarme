@@ -97,7 +97,8 @@ class PerfilMaestro(models.Model):
 
 class SolicitudTarea(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, default=1)
-    perfil_maestro = models.ForeignKey(PerfilMaestro, on_delete=models.CASCADE)
+    #                                                   related_name='solicitudtarea'
+    perfil_maestro = models.ForeignKey('PerfilMaestro', on_delete=models.CASCADE, related_name='solicitudtarea')
     nombre = models.TextField()
     tarea = models.TextField()
     descripcion = models.TextField()
