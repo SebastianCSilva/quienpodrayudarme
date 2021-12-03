@@ -52,8 +52,12 @@ h1, h2, h3, h4 {
     margin-right: 20px;
 }
 
-.usuarios {
-    margin-bottom: 70px;
+.usuarios#usuario {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    margin-left: 35px;
+    margin-right: 35px;
+    padding: 10px;
 }
 
 .usuarios-form textarea, .usuarios-form input {
@@ -76,3 +80,17 @@ h1, h2, h3, h4 {
 .comment {
     margin: 20px 0px 20px 20px;
 }
+
+.paginacion div {
+    margin-top: 70px;
+    text-align: center;
+
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }

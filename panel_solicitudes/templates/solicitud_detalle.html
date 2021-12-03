@@ -3,35 +3,53 @@
 {% block content %}
     <div class="post">
         
-           
-        <h1>Perfil de maestro: {{ solicitud_tarea.perfil_maestro }} </h1>
-        <h2>Nombre: {{ solicitud_tarea.nombre }}</h2>
-        <p>Tarea: {{ solicitud_tarea.tarea }}</p>
-        <p>Descripcion de tarea: {{ solicitud_tarea.descripcion }}</p>
-        <p>Direccion de solicitud:{{ solicitud_tarea.direccion }}</p>
-        <p>Estado de la tarea: {{ solicitud_tarea.estado }}</p>
-        <p><b>Fecha solicitada: {{ solicitud_tarea.fecha |date:"M d, Y" }}</p>
+        <div class="col-md-6">
+            <h2>Nombre: {{ solicitud_tarea.nombre }}</h2>
+            <p>Tarea: {{ solicitud_tarea.tarea }}</p>
+            <p>Descripcion de tarea: {{ solicitud_tarea.descripcion }}</p>
+            <p>Direccion de solicitud:{{ solicitud_tarea.direccion }}</p>
+            <p>Estado de la tarea: {{ solicitud_tarea.estado }}</p>
+            <p><b>Fecha solicitada: {{ solicitud_tarea.fecha |date:"M d, Y" }}</p>
 
-        {% if user.is_authenticated %}
-        <!--                post.comments.all
-        -->
-            <hr>            
-            {% for comentario in solicitud_tarea.comentariossolicitud.all %}
-                <div class="comment">
-                    <div class="date">Fecha: {{ comentario.created_date }}</div>
-                    <strong>Apodo: {{ comentario.author }}</strong>
-                    <p>Comentario: {{ comentario.text|linebreaks }}</p>
-                </div>
-            {% empty %}
-                <p>No existen Comentarios aqui aun </p>
-            {% endfor %}                                
-            <!--
-                Cuidado con el solicitud_tarea de abajo
+                 
+        </div>
+
+
+        <div class="col-md-6">
+            <h1>Perfil de maestro</h1>
+            <h2>Apodo maestro: {{ solicitud_tarea.perfil_maestro.usuario.user }} </h2>
+            <p>Nombre: {{ solicitud_tarea.perfil_maestro.usuario.nombre }} {{ solicitud_tarea.perfil_maestro.usuario.apellidos }}</p>
+            <p>Rut: {{ solicitud_tarea.perfil_maestro.usuario.rut }}</p>
+            <p>Celular: {{ solicitud_tarea.perfil_maestro.usuario.celular }}</p>
+            <p>Direccion: {{ solicitud_tarea.perfil_maestro.usuario.direccion }}</p>
+            <p>Genero: {{ solicitud_tarea.perfil_maestro.usuario.genero }}</p>
+            {% for tarea in solicitud_tarea.perfil_maestro.tareas.all %}
+                <p>Tareas Maestro: {{ tarea }} </p>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-6">
+            {% if user.is_authenticated %}
+            <!--                post.comments.all
             -->
-            <a class="btn btn-default" href="{% url 'agregar_comentario_solicitud' pk=solicitud_tarea.pk %}">Agregar Comentario</a>
+                <hr>            
+                {% for comentario in solicitud_tarea.comentariossolicitud.all %}
+                    <div class="comment">
+                        <div class="date">Fecha: {{ comentario.created_date }}</div>
+                        <strong>Apodo: {{ comentario.author }}</strong>
+                        <p>Comentario: {{ comentario.text|linebreaks }}</p>
+                    </div>
+                {% empty %}
+                    <p>No existen Comentarios aqui aun </p>
+                {% endfor %}                                
+                <!--
+                    Cuidado con el solicitud_tarea de abajo
+                -->
+                <a class="btn btn-default" href="{% url 'agregar_comentario_solicitud' pk=solicitud_tarea.pk %}">Agregar Comentario</a>
 
-        {% endif %}     
-
+            {% endif %}
+                     
+        </div>
 
     </div>
 {% endblock %}

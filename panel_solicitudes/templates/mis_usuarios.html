@@ -3,21 +3,23 @@
 
 {% block content %}
 <div >
-    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3" style='background-color: #EDFEFF' align="">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3" align="">
 
     {% for usuario in usuarios %}
 
         
 
-        <div class="usuarios">
+        <div class="usuarios" style='background-color: #EDFEFF'>
+            <a href="{% url 'usuario_editar' pk=usuario.pk %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Editar Perfil Usuario</a>
+
             <h1><a href="{% url 'usuario_detalle' pk=usuario.pk %}" style="color:#008cff">Nombre: {{ usuario.nombre }}  {{ usuario.apellidos }}</a></h1>
             <h3>Rut: {{ usuario.rut }}</h3>
-            <p>celular {{ usuario.celular }} </p>
-            <p>fecha_nacimiento: {{ usuario.fecha_nacimiento }} </p>
-            <p>direccion: {{ usuario.direccion }} </p>
-            <p>genero: {{ usuario.genero }} </p>
-            <p>verificacion: {{ usuario.verificacion }} </p>
-            <p>created_date {{ usuario.created_date }} </p>
+            <p>Celular {{ usuario.celular }} </p>
+            <p>Fecha de nacimiento: {{ usuario.fecha_nacimiento }} </p>
+            <p>Direccion: {{ usuario.direccion }} </p>
+            <p>Genero: {{ usuario.genero }} </p>
+            <p>Verificacion: {{ usuario.verificacion }} </p>
+            <p>Fecha de creacoin {{ usuario.created_date }} </p>
         </div>
 
         

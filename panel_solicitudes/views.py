@@ -3,6 +3,8 @@ from django.http import request
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.utils import timezone
+from django.core.paginator import Paginator
+
 from .forms import *
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
@@ -64,8 +66,13 @@ def categorias_lista(request):
 
 # Pagina para listar los Maestros
 def maestros_lista(request):
-    maestros = PerfilMaestro.objects.order_by('id')
-    return render(request, 'panel_solicitudes/templates/maestros_lista.html', {'maestros': maestros})
+    maestros = PerfilMaestro.objects.order_by('created_date')
+    # Probando codigo de paginacion
+    paginator = Paginator(maestros, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    # Funcionando
+    return render(request, 'panel_solicitudes/templates/maestros_lista.html', {'page_obj': page_obj})
 
 
 
@@ -222,11 +229,10 @@ def usuario_editar(request, pk):
     usuario = get_object_or_404(Usuario, pk=pk)
     if request.method == "POST":
         form = UsuarioForm(request.POST, instance=usuario)
-        mi_usuario = Usuario.objects.get(user=request.user)
+        mi_usuario = User.objects.get(id=request.user.id)
         if form.is_valid():
             usuario = form.save(commit=False)
             usuario.user = mi_usuario
-            usuario.author = mi_usuario
             usuario.created_date = timezone.now()
             usuario.save()
             return redirect('usuario_detalle', pk=usuario.pk)
@@ -234,6 +240,11 @@ def usuario_editar(request, pk):
         form = UsuarioForm(instance=usuario)
     return render(request, 'usuario_editar.html', {'form': form})
 
+    """
+        mi_usuario = Usuario.objects.get(user=request.user.id)
+        mi_usuario2 = User.objects.get(id=request.user.id)
+    
+    """
 
 
 
@@ -303,3 +314,21 @@ def agregar_solicitud_nueva(request, pk):
     else:
         form = Solicitud_Maestro_Tarea_Form()
     return render(request, 'agregar_solicitud_nueva.html', {'form': form})
+
+@login_required(login_url='/login')
+@user_is_solicitud_author
+def solicitud_editar_nueva(request, pk):
+    post = get_object_or_404(SolicitudTarea, pk=pk)
+    if request.method == "POST":
+        form = Solicitud_Maestro_Tarea_Form(request.POST, instance=post)
+        mi_usuario = Usuario.objects.get(user=request.user.id)
+        mi_usuario2 = User.objects.get(id=request.user.id)
+        if form.is_valid():
+            solicitud_tarea = form.save(commit=False)
+            solicitud_tarea.author = mi_usuario2
+            solicitud_tarea.created_date = timezone.now()
+            solicitud_tarea.save()
+            return redirect('solicitud_detalle', pk=solicitud_tarea.pk)
+    else:
+        form = Solicitud_Maestro_Tarea_Form(instance=post)
+    return render(request, 'solicitud_editar.html', {'form': form})

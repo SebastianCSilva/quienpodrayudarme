@@ -4,12 +4,18 @@
 {% block content %}
 <div >
     {% for maestro in maestros %}
-    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3" style='background-color: #EDFEFF' align="">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3" align="">
 
-        <div class="usuarios row align-items-center">
+        <div class="usuarios row align-items-center" style='background-color: #EDFEFF' style="border:3px solid #EDFEFF">
+            <div>
+                <a href="{% url 'maestro_solicitudes' pk=maestro.pk %}" class="btn btn-primary active" role="button" aria-pressed="true">Filtrar las solicitudes</a>
+                <a href="{% url 'maestro_editar' pk=maestro.pk %}" class="btn btn-second active" role="button" aria-pressed="true">Modificar Tareas Maestro</a>
+                <hr>
+                
+            </div>
             
-           
-           <h3> <a href="{% url 'maestro_solicitudes' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>
+            <a href="{% url 'maestro_detalle' pk=maestro.pk %}">Solicitudes Coordinadas: {{ maestro.solicitudtarea.count }}</a>
+            <h3> <a href="{% url 'maestro_solicitudes' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>
             <p>Rut: {{ maestro.usuario.rut|linebreaksbr }}</p>
             <p>Celular: {{ maestro.usuario.celular }}</p>
             <p>Fecha nacimiento: {{ maestro.usuario.fecha_nacimiento|linebreaksbr }}</p>

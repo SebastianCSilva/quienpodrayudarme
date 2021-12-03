@@ -41,5 +41,7 @@ urlpatterns = [
     path('maestro/<int:pk>/comentariosmaestro/', views.agregar_comentario_maestro, name='agregar_comentario_maestro'),
     #agregar_solicitud_nueva
     path('maestro/<int:pk>/solicitudtarea/', views.agregar_solicitud_nueva, name='agregar_solicitud_nueva'),
+    # solicitud_editar_nueva
+    path('solicitud/<int:pk>/editarnueva/', views.solicitud_editar_nueva, name='solicitud_editar_nueva'),
 
 ]
