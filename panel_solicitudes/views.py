@@ -130,11 +130,12 @@ def maestro_editar(request, pk):
         form = MaestroForm(request.POST, instance=maestro)
         # Con esto obtenemos todos los datos del usuario actual
         mi_usuario = Usuario.objects.get(user=request.user)
+        mi_usuario2 = User.objects.get(id=request.user.id)
         if form.is_valid():
             maestro = form.save(commit=False)
             # Estas lineas de codigo pueden arreglar errores futuros
             maestro.usuario = mi_usuario
-            maestro.author = mi_usuario
+            maestro.author = mi_usuario2
             maestro.created_date = timezone.now()
             maestro.save()
             form.save_m2m()

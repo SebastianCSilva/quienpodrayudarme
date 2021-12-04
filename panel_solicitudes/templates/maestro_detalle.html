@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="col-md-8">
+    <div class="col-md-12">
         
         <div class="usuarios">
             {% if user.is_authenticated %}
@@ -10,8 +10,9 @@
             <a href="{% url 'agregar_solicitud_nueva' pk=maestro.pk %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Crear Solicitud de Tarea</a>
 
             {% endif %}      
-             
-            <h1>Nombre: {{ maestro.usuario.nombre }}  {{ maestro.usuario.apellidos }}</h1>
+            
+            <div class="col-md-6">
+                <h1>Nombre: {{ maestro.usuario.nombre }}  {{ maestro.usuario.apellidos }}</h1>
             <h3>Rut: {{ maestro.usuario.rut }}</h3>
             <p>Fecha de nacimiento: {{ maestro.usuario.fecha_nacimiento }} </p>
             <p>Direccion: {{ maestro.usuario.direccion }} </p>
@@ -28,7 +29,10 @@
 
             {% endfor %}
 
-            {% if user.is_authenticated %}
+            </div>
+
+            <div class="col-md-6">
+                {% if user.is_authenticated %}
         <!--                post.comments.all       maestro
         -->
             <hr>            
@@ -45,7 +49,9 @@
                 Cuidado con el solicitud_tarea de abajo
             -->
             <a class="btn btn-default" href="{% url 'agregar_comentario_maestro' pk=maestro.pk %}">Agregar Comentario</a>
-        {% endif %}
+            {% endif %}
+
+            </div>
 
         </div>
     </div>
