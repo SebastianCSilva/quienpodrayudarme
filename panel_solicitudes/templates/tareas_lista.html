@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <h1>Filtrar los Maestros por tareas</h1>
+    <p>Click en la tarea</p>
+    
+    <table class='table'>
+        <tr >
+            <th>Categoria</th> 
+            <th>Tarea</th>
+            <th>Descripcion</th> 
+        </tr>
+        {% for q in tareas %}
+            <tr>
+                <td>{{q.id_categoria.nombre}}</td>
+                <td><a href="{% url 'tarea_maestros' pk=q.pk %}">{{q.nombre}}</a></td>
+                <td>{{q.descripcion}}</td>
+            </tr>
+        {% endfor %}
+     </table>
+{% endblock %}

@@ -24,6 +24,13 @@
                 <li><a href="/usuario/nueva">Usuario Nuevo</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <form class="d-flex" method=POST action="{% url 'busqueda_tareas' %}">
+                    {% csrf_token %}
+                    <input type="search" placeholder="Buscar tarea" aria-label="Search" name="searched">
+                    <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                </form>
+
+
                 {% if user.is_authenticated %}
                     <li><a href="/mis-usuarios/"><span class="glyphicon glyphicon-user"></span> Perfil de Usuario</a></li>
                     <li><a href="/mis-solicitudes/"><span class="glyphicon glyphicon-folder-open"></span> Mis Solicitudes</a></li>
@@ -51,7 +58,7 @@
     </div>
     -->
     <div class="content container">
-        <div class="row">
+        <div class="">
             <div class="">
                 {% block content %}
                 

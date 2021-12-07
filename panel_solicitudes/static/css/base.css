@@ -10,10 +10,6 @@
     text-decoration: none;
 }
 
-.content {
-    
-}
-
 h1, h2, h3, h4 {
     font-family: 'Lobster', cursive;
 }
@@ -93,4 +89,20 @@ h1, h2, h3, h4 {
     border: 3px solid #EDFEFF;
     border-radius: 3px;
     margin-bottom: 20px;
+}
+
+.table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+  
+tr:nth-child(even) {
+    background-color: #dddddd;
 }

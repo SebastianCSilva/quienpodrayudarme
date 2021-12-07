@@ -63,6 +63,15 @@ def categorias_lista(request):
     categorias = Categoria.objects.order_by('nombre')
     return render(request, 'panel_solicitudes/templates/categorias_lista.html', {'categorias': categorias} )
 
+def tareas_lista(request):
+    tareas = Tarea.objects.order_by('nombre')
+    return render(request, 'panel_solicitudes/templates/tareas_lista.html', {'tareas': tareas} )
+
+def tarea_maestros(request, pk):
+    maestros = PerfilMaestro.objects.filter(tareas=pk)
+    return render(request, 'tarea_maestros.html', {'maestros': maestros})
+
+
 
 # Pagina para listar los Maestros
 def maestros_lista(request):
@@ -333,3 +342,13 @@ def solicitud_editar_nueva(request, pk):
     else:
         form = Solicitud_Maestro_Tarea_Form(instance=post)
     return render(request, 'solicitud_editar.html', {'form': form})
+
+def busqueda_tareas(request):
+    if request.method == "POST":
+        searched  = request.POST.get('searched')
+        tareas = Tarea.objects.filter(nombre__icontains=searched)
+        return render(request, 'busqueda_tareas.html', {'searched':searched,
+        'tareas':tareas})
+    else:
+        render(request, 'busqueda_tareas.html', {})
+    

@@ -26,7 +26,7 @@ class Solicitud_Tarea_Form(forms.ModelForm):
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ['nombre', 'apellidos', 'rut', 'fecha_nacimiento', 'direccion', 'genero','celular']
+        fields = ['nombre', 'apellidos', 'rut', 'fecha_nacimiento', 'direccion', 'comuna', 'genero','celular']
         widgets = {
             'fecha_nacimiento': DateInput(format=('%Y-%m-%d')),
         }
@@ -54,7 +54,7 @@ class ComentarioMaestroForm(forms.ModelForm):
 class Solicitud_Maestro_Tarea_Form(forms.ModelForm):
     class Meta:
         model = SolicitudTarea
-        fields = ['nombre', 'tarea', 'descripcion', 'direccion', 'estado','fecha']
+        fields = ['nombre', 'tarea', 'descripcion', 'direccion', 'estado','fecha','comuna','calificacion']
         widgets = {
             'fecha': DateInput(format=('%Y-%m-%d')),
         }

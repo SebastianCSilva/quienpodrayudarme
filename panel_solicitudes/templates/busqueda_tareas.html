@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% if searched %}
+    <h1>Tareas</h1>
+    <p>Tu buscaste por {{searched}}</p>
+    <br/>
+    <table class='table'>
+        <tr >
+            <th>Categoria</th> 
+            <th>Tarea</th>
+            <th>Descripcion</th> 
+        </tr>
+        {% for q in tareas %}
+            <tr>
+                <td>{{q.id_categoria.nombre}}</td>
+                <td><a href="{% url 'tarea_maestros' pk=q.pk %}">{{q.nombre}}</a></td>
+                <td>{{q.descripcion}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% else %}
+
+    <h1>Se te olvido buscar una tarea</h1>
+
+{% endif %}
+{% endblock %}

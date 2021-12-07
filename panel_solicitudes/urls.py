@@ -11,6 +11,9 @@ urlpatterns = [
     path('logout', views.logout_usuario, name='logout'),
     #
     path('maestros/', views.maestros_lista, name='maestros_lista'),
+    path('tareas/', views.tareas_lista, name='tareas_lista'),
+    path('tarea_maestros/<int:pk>/', views.tarea_maestros, name='tarea_maestros'),
+    #
     path('maestro_solicitudes/<int:pk>/', views.maestro_solicitudes, name='maestro_solicitudes'),
     #
     path('maestro/<int:pk>/', views.maestro_detalle, name='maestro_detalle'),
@@ -43,5 +46,7 @@ urlpatterns = [
     path('maestro/<int:pk>/solicitudtarea/', views.agregar_solicitud_nueva, name='agregar_solicitud_nueva'),
     # solicitud_editar_nueva
     path('solicitud/<int:pk>/editarnueva/', views.solicitud_editar_nueva, name='solicitud_editar_nueva'),
+    #
+    path('busqueda_tareas/', views.busqueda_tareas, name='busqueda_tareas'),
 
 ]
