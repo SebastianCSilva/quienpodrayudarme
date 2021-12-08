@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <h1>Filtrar los Maestros por comuna</h1>
+    <p>Click en la comuna</p>
+    
+    <table class='table'>
+        <tr >
+            <th>Comuna</th> 
+        </tr>
+        {% for q in comunas %}
+            <tr>
+                <td><a href="{% url 'comunas_maestros' pk=q.pk %}">{{q.nombre}}</a></td>
+            </tr>
+        {% endfor %}
+     </table>
+{% endblock %}

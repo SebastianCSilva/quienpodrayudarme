@@ -352,3 +352,13 @@ def busqueda_tareas(request):
     else:
         render(request, 'busqueda_tareas.html', {})
     
+
+def comunas_lista(request):
+    comunas = Comuna.objects.order_by('nombre')
+    return render(request, 'panel_solicitudes/templates/comunas_lista.html', {'comunas': comunas} )
+
+
+def comunas_maestros(request, pk):
+    maestros = PerfilMaestro.objects.filter(usuario__comuna=pk)
+    return render(request, 'comunas_maestros.html', {'maestros': maestros})
+

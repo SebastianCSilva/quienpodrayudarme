@@ -48,5 +48,7 @@ urlpatterns = [
     path('solicitud/<int:pk>/editarnueva/', views.solicitud_editar_nueva, name='solicitud_editar_nueva'),
     #
     path('busqueda_tareas/', views.busqueda_tareas, name='busqueda_tareas'),
-
+    #
+    path('comunas/', views.comunas_lista, name='comunas_lista'),
+    path('comunas_maestros/<int:pk>/', views.comunas_maestros, name='comunas_maestros'),
 ]

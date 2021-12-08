@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div >
+    {% for maestro in maestros %}
+    <div class="col-md-3 col-md-4" align="">
+
+        <div class="usuarios row align-items-center" style='background-color: #EDFEFF' style="border:3px solid #EDFEFF">
+           
+            <a href="{% url 'maestro_detalle' pk=maestro.pk %}">Solicitudes Coordinadas: {{ maestro.solicitudtarea.count }}</a>
+            <h3> <a href="{% url 'maestro_detalle' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>
+            <p>Rut: {{ maestro.usuario.rut|linebreaksbr }}</p>
+            <p>Celular: {{ maestro.usuario.celular }}</p>
+            <p>Comuna: {{ maestro.usuario.comuna|linebreaksbr }}</p>
+            <p>Fecha nacimiento: {{ maestro.usuario.fecha_nacimiento|linebreaksbr }}</p>
+            <p>Genero: {{ maestro.usuario.genero|linebreaksbr }}</p>
+            <p>Fecha de integracion: {{ maestro.usuario.created_date }}</p>
+            <h3>Tareas que puede realizar</h3>
+            
+            {% for col in maestro.tareas.all %}
+
+                <td>{{ col.nombre }}</td>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
