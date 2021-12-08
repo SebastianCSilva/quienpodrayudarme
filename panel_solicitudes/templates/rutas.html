@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="col-md-12">
+    
+    <div>        
+        <h1>Rutas de la pagina web</h1>
+        <p>Ayuda para conocer rutas</p>
+        
+    </div>
+
+    <div align="center">
+        <br/>
+        <table class='table'>
+            <tr >
+                <th>Nombre</th>
+                <th>URL</th>
+                <th>Descripcion</th> 
+            </tr>
+            
+                <tr>
+                    <td>Home</td>
+                    <td><a href="/home">home</a></td>
+                    <td>Pagina principal y de bienvenida a la pagina web con accesos rapidos</td>
+                </tr>
+                <tr>
+                    <td>Rutas</td>
+                    <td><a href="/rutas/">rutas/</a></td>
+                    <td>Pagina con ayudar para ver todas las funcionalidades</td>
+                </tr>
+                <tr>
+                    <td>Categorias</td>
+                    <td><a href="/categorias">/categorias</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Registrar</td>
+                    <td><a href="/registrar">/registrar</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Login</td>
+                    <td><a href="/login">/login</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Logout</td>
+                    <td><a href="/logout">/logout</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Maestros</td>
+                    <td><a href="/maestros/">/maestros/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Tareas</td>
+                    <td><a href="/tareas/">/tareas/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Tarea Maestros</td>
+                    <td><a href="/tarea_maestros/x/">/tarea_maestros/x/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Maestros nuevo</td>
+                    <td><a href="/maestro/nueva">/maestro/nueva</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Listado de solicitudes</td>
+                    <td><a href="/solicitudes/">/solicitudes/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Crear Solicitud Rapida</td>
+                    <td><a href="/solicitud/nueva">/solicitud/nueva</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Listado Usuarios</td>
+                    <td><a href="/usuarios/">/usuarios/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Creacion Perfil Usuario</td>
+                    <td><a href="/usuario/nueva">/usuario/nueva</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Mi Usuario</td>
+                    <td><a href="/mis-usuarios/">/mis-usuarios/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Mis Perfiles de Maestro</td>
+                    <td><a href="/mis-maestros/">/mis-maestros/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Mis Solicitudes</td>
+                    <td><a href="/mis-solicitudes/">/mis-solicitudes/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Buscador de Tareas</td>
+                    <td><a href="/busqueda_tareas/">/busqueda_tareas/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Listado de Comunas</td>
+                    <td><a href="/comunas/">/comunas/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                
+
+
+           
+        </table>
+        
+    </div>
+</br>
+    <div>
+        <h1>Paginas no soportadas URL directa</h1>
+        <table class='table'>
+            <tr >
+                <th>Nombre</th>
+                <th>URL</th>
+                <th>Descripcion</th> 
+            </tr>
+            
+                
+                <tr>
+                    <td>Tarea Maestros</td>
+                    <td><a href="/tarea_maestros/<int:pk>/">/tarea_maestros/x/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Tarea Maestros</td>
+                    <td><a href="maestro_solicitudes/<int:pk>/">/maestro_solicitudes/x/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Maestros Detalle</td>
+                    <td><a href="/maestro/<int:pk>/">/maestro/x/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Editar Maestro</td>
+                    <td><a href="/maestro/x/editar/">/maestro/x/editar/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Detalle de Solicitudes</td>
+                    <td><a href="/solicitud/x/">/solicitud/x/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Edicion de Solicitudes</td>
+                    <td><a href="/solicitud/x/editar/">/solicitud/x/editar/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Detalle Usuarios</td>
+                    <td><a href="/usuario/x/">/usuario/x/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Edicion Usuarios</td>
+                    <td><a href="/usuario/x/editar/">/usuario/x/editar/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Comentarios de Solicitud</td>
+                    <td><a href="/solicitud/x/comentariossolicitud/">/solicitud/x/comentariossolicitud/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Comentarios de Maestro</td>
+                    <td><a href="maestro/x/comentariosmaestro/">/maestro/x/comentariosmaestro/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Creacion de Solicitud directa</td>
+                    <td><a href="/maestro/x/solicitudtarea/">/maestro/x/solicitudtarea/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Edicion de Solicitud Directa</td>
+                    <td><a href="/solicitud/x/editarnueva/">/solicitud/x/editarnueva/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+                <tr>
+                    <td>Listado de Maestros por comuna</td>
+                    <td><a href="/comunas_maestros/x/">/comunas_maestros/x/</a></td>
+                    <td>Lorem ipsum dolor sit amet,</td>
+                </tr>
+
+
+           
+        </table>
+    </div>
+    
+
+</div>
+{% endblock %}
+

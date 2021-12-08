@@ -20,6 +20,9 @@ from .decorators import *
 def home(request):
     return render(request, 'panel_solicitudes/templates/home.html', {} )
 
+def rutas(request):
+    return render(request, 'panel_solicitudes/templates/rutas.html', {} )
+
 def registrar(request):
     form = UsuarioCreacionForm()
 
@@ -361,4 +364,3 @@ def comunas_lista(request):
 def comunas_maestros(request, pk):
     maestros = PerfilMaestro.objects.filter(usuario__comuna=pk)
     return render(request, 'comunas_maestros.html', {'maestros': maestros})
-
