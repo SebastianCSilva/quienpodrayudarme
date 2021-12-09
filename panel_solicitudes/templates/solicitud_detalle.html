@@ -4,10 +4,12 @@
     <div class="post">
         
         <div class="col-md-6">
+            <p><b> Calificacion: {{ solicitud_tarea.calificacion }} </b></p>
             <h2>Nombre: {{ solicitud_tarea.nombre }}</h2>
             <p>Tarea: {{ solicitud_tarea.tarea }}</p>
             <p>Descripcion de tarea: {{ solicitud_tarea.descripcion }}</p>
             <p>Direccion de solicitud:{{ solicitud_tarea.direccion }}</p>
+            <p>Comuna:{{ solicitud_tarea.comuna }}</p>
             <p>Estado de la tarea: {{ solicitud_tarea.estado }}</p>
             <p><b>Fecha solicitada: {{ solicitud_tarea.fecha |date:"M d, Y" }}</p>
 
@@ -22,9 +24,11 @@
             <p>Rut: {{ solicitud_tarea.perfil_maestro.usuario.rut }}</p>
             <p>Celular: {{ solicitud_tarea.perfil_maestro.usuario.celular }}</p>
             <p>Direccion: {{ solicitud_tarea.perfil_maestro.usuario.direccion }}</p>
+            <p>Comuna: {{ solicitud_tarea.perfil_maestro.usuario.comuna }}</p>
             <p>Genero: {{ solicitud_tarea.perfil_maestro.usuario.genero }}</p>
+            <h3>Tareas Maestro: </h3>
             {% for tarea in solicitud_tarea.perfil_maestro.tareas.all %}
-                <p>Tareas Maestro: {{ tarea }} </p>
+                <td>{{ tarea.nombre }} </td>
             {% endfor %}
         </div>
 

@@ -154,6 +154,7 @@ class ComentarioMaestro(models.Model):
 
 class Sugerencia(models.Model):
     descripcion = models.TextField(max_length=250)
+    created_date = models.DateTimeField(default=timezone.now)
     # Agregar el Author de la sugerencia para futuras posibles notificaciones
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, default=1)
     def __str__(self):

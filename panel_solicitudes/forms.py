@@ -59,3 +59,7 @@ class Solicitud_Maestro_Tarea_Form(forms.ModelForm):
             'fecha': DateInput(format=('%Y-%m-%d')),
         }
 
+class SugerenciaForm(forms.ModelForm):
+    class Meta:
+        model = Sugerencia
+        fields = ['descripcion']

@@ -161,11 +161,19 @@ def maestro_editar(request, pk):
 
 
 
-
+#Agregar paginacion
 @login_required(login_url='/login')
 def solicitud_lista(request):
     solicitud_tareas = SolicitudTarea.objects.order_by('id')
-    return render(request, 'solicitud_tareas.html', {'solicitud_tareas':solicitud_tareas})
+    """
+        paginator = Paginator(maestros, 12)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+    """
+    paginator = Paginator(solicitud_tareas, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'solicitud_tareas.html', {'page_obj':page_obj})
 
 @login_required(login_url='/login')
 def solicitud_detalle(request, pk):
@@ -212,7 +220,10 @@ def solicitud_editar(request, pk):
 @login_required(login_url='/login')
 def usuario_lista(request):
     usuarios = Usuario.objects.order_by('id')
-    return render(request, 'usuario_lista.html', {'usuarios':usuarios})
+    paginator = Paginator(usuarios, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'usuario_lista.html', {'page_obj':page_obj})
 
 @login_required(login_url='/login')
 @user_is_entry_author
@@ -274,24 +285,31 @@ def mis_usuarios(request):
 @login_required(login_url='/login')
 def mis_maestros(request):
     maestros = PerfilMaestro.objects.filter(author_id = request.user.id)
-    return render(request, 'mis_maestros.html', {'maestros':maestros})
+    paginator = Paginator(maestros, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'mis_maestros.html', {'page_obj':page_obj})
 
     
 @login_required(login_url='/login')
 def mis_solcitudes(request):
     
     solicitudes = SolicitudTarea.objects.filter(author_id = request.user.id)
-
-    return render(request, 'mis_solcitudes.html', {'solicitudes':solicitudes})
+    paginator = Paginator(solicitudes, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'mis_solcitudes.html', {'page_obj':page_obj})
 
 
 def agregar_comentario_solicitud(request, pk):
     solicitud = get_object_or_404(SolicitudTarea, pk=pk)
     if request.method == "POST":
         form = ComentarioSolicitudForm(request.POST)
+        mi_usuario = User.objects.get(id=request.user.id)
         if form.is_valid():
             comentariossolicitud = form.save(commit=False)
             comentariossolicitud.solicitud = solicitud
+            comentariossolicitud.author = mi_usuario
             comentariossolicitud.save()
             return redirect('solicitud_detalle', pk=solicitud.pk)
     else:
@@ -302,9 +320,11 @@ def agregar_comentario_maestro(request, pk):
     maestro = get_object_or_404(PerfilMaestro, pk=pk)
     if request.method == "POST":
         form = ComentarioMaestroForm(request.POST)
+        mi_usuario = User.objects.get(id=request.user.id)
         if form.is_valid():
             comentariosmaestro = form.save(commit=False)
             comentariosmaestro.maestro = maestro
+            comentariosmaestro.author = mi_usuario
             comentariosmaestro.save()
             return redirect('maestro_detalle', pk=maestro.pk)
     else:
@@ -364,3 +384,20 @@ def comunas_lista(request):
 def comunas_maestros(request, pk):
     maestros = PerfilMaestro.objects.filter(usuario__comuna=pk)
     return render(request, 'comunas_maestros.html', {'maestros': maestros})
+#
+#
+#
+@login_required(login_url='/login')
+def agregar_sugerencia(request):
+    if request.method == "POST":
+        form = SugerenciaForm(request.POST)
+        mi_usuario = User.objects.get(id=request.user.id)
+        if form.is_valid():
+            sugerencia = form.save(commit=False)
+            sugerencia.author = mi_usuario
+            sugerencia.created_date = timezone.now()
+            sugerencia.save()
+            return redirect('home')
+    else:
+        form = SugerenciaForm()
+    return render(request, 'agregar_sugerencia.html', {'form': form})

@@ -52,4 +52,6 @@ urlpatterns = [
     #
     path('comunas/', views.comunas_lista, name='comunas_lista'),
     path('comunas_maestros/<int:pk>/', views.comunas_maestros, name='comunas_maestros'),
+    # agregar_sugerencia
+    path('agregar_sugerencia/', views.agregar_sugerencia, name='agregar_sugerencia'),
 ]

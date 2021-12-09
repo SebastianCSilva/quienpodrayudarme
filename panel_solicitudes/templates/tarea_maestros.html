@@ -6,7 +6,7 @@
     {% for maestro in maestros %}
     <div class="col-md-3 col-md-4" align="">
 
-        <div class="usuarios row align-items-center" style='background-color: #EDFEFF' style="border:3px solid #EDFEFF">
+        <div class="usuarios row align-items-center" style="border:3px solid #EDFEFF">
            
             <a href="{% url 'maestro_detalle' pk=maestro.pk %}">Solicitudes Coordinadas: {{ maestro.solicitudtarea.count }}</a>
             <h3> <a href="{% url 'maestro_detalle' pk=maestro.pk %}">Nombre: {{ maestro.usuario.nombre|linebreaksbr }} {{ maestro.usuario.apellidos|linebreaksbr }}</a></h3>

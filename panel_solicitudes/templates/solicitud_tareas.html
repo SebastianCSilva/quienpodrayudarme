@@ -2,25 +2,63 @@
 
 {% block content %}
 
-    {% for solicitud_tarea in solicitud_tareas %}
+    {% for solicitud_tarea in page_obj %}
 
-    <div class="col-6 col-md-4">
+    <div class="col-xs-12 col-sm-6 col-md-3" style="border:3px solid #EDFEFF" align="">
 
-        <h1> Autor {{ solicitud_tarea.author }}</h1>
-        <h2> perfil_maestro {{ solicitud_tarea.perfil_maestro }}</h2>
-        <h3> nombre {{ solicitud_tarea.nombre }}</h3>
-        <p> tarea {{ solicitud_tarea.tarea }} </p>
-        <p> descripcion {{ solicitud_tarea.descripcion }} </p>
-        <p> direccion {{ solicitud_tarea.direccion }} </p>
-        <p> estado {{ solicitud_tarea.estado }} </p>
-        <p> created_date {{ solicitud_tarea.created_date }} </p>
-        <p> fecha {{ solicitud_tarea.fecha }} </p>
+        <h3 > Nombre de Solicitud: {{ solicitud_tarea.nombre }}</h3>
+        <div class="">
+            <h3>Perfil de maestro</h3>
+            <p>Apodo del maestro: {{ solicitud_tarea.perfil_maestro.usuario.user }} </p>
+            <p>Nombre: {{ solicitud_tarea.perfil_maestro.usuario.nombre }} {{ solicitud_tarea.perfil_maestro.usuario.apellidos }}</p>
+            <p>Rut: {{ solicitud_tarea.perfil_maestro.usuario.rut }}</p>
+            <p>Celular: {{ solicitud_tarea.perfil_maestro.usuario.celular }}</p>
+            <p>Comuna: {{ solicitud_tarea.perfil_maestro.usuario.comuna }}</p>
 
-    
+            
+
+                <p>Tareas Maestro: </p>
+                {% for tarea in solicitud_tarea.perfil_maestro.tareas.all %}
+                    <td>{{ tarea.nombre }} </td>
+                {% endfor %}
+
+           
+        </div>
+        <h3>Detalles de solicitud </h3>
+        <p><b> Calificacion: {{ solicitud_tarea.calificacion }} </b></p>
+
+        <p> Autor: {{ solicitud_tarea.author }}</p>
+        <p> Tarea: {{ solicitud_tarea.tarea|linebreaks }} </p>
+        <p> Descripcion: {{ solicitud_tarea.descripcion|linebreaks }} </p>
+        <p> Direccion: {{ solicitud_tarea.direccion }} </p>
+        <p> Comuna: {{ solicitud_tarea.comuna }} </p>
+        <p> Estado: {{ solicitud_tarea.estado }} </p>
+        <p> Fecha de creacion: {{ solicitud_tarea.created_date }} </p>
+        <p><b> Fecha solicitada: {{ solicitud_tarea.fecha }} </b></p>        
 
     </div>
     
 
     {% endfor %}
+
+    <div class="paginacion" align='center'>
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </div>
   
 {% endblock %}

@@ -3,8 +3,8 @@
 
 {% block content %}
 <div >
-    {% for solicitud in solicitudes %}
-    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3" style='background-color: #EDFEFF' align="">
+    {% for solicitud in page_obj %}
+    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3" align="">
         
         <div class="usuarios row align-items-center" style="border:3px solid #EDFEFF">
             <div align="center">
@@ -27,16 +27,19 @@
                 <p>Celular: {{ solicitud.perfil_maestro.usuario.celular }}</p>
                 <p>Tareas Maestro: </p>
                 {% for tarea in solicitud.perfil_maestro.tareas.all %}
-                    <p>{{ tarea }} </p>
+                    <td>{{ tarea.nombre }} </td>
                 {% endfor %}
             </div>
             <h3>Detalles de solicitud </h3>
             <p> Tarea: {{ solicitud.tarea|linebreaks }} </p>
             <p> Descripcion: {{ solicitud.descripcion|linebreaks }} </p>
             <p> Direccion: {{ solicitud.direccion }} </p>
+            <p> Comuna: {{ solicitud.comuna }} </p>
             <p> Estado: {{ solicitud.estado }} </p>
             <p> Fecha de creacion: {{ solicitud.created_date }} </p>
-            <p><b> Fecha solicitada: {{ solicitud.fecha }} </p>
+            <p><b> Fecha solicitada: {{ solicitud.fecha }} </b></p>
+            
+            <p><b> Calificacion: {{ solicitud.calificacion }} </b></p>
 
             <a href="{% url 'solicitud_detalle' pk=solicitud.pk %}">Comentarios: {{ solicitud.comentariossolicitud.count }}</a>
 
@@ -45,5 +48,25 @@
 
     </div>
     {% endfor %}
+
+    <div class="paginacion" align='center'>
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
