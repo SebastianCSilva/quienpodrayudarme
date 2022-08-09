@@ -71,14 +71,14 @@ def tareas_lista(request):
     return render(request, 'panel_solicitudes/templates/tareas_lista.html', {'tareas': tareas} )
 
 def tarea_maestros(request, pk):
-    maestros = PerfilMaestro.objects.filter(tareas=pk)
+    maestros = PerfilMaestro.objects.filter(tareas=pk).order_by('-created_date')
     return render(request, 'tarea_maestros.html', {'maestros': maestros})
 
 
 
 # Pagina para listar los Maestros
 def maestros_lista(request):
-    maestros = PerfilMaestro.objects.order_by('created_date')
+    maestros = PerfilMaestro.objects.order_by('-created_date')
     # Probando codigo de paginacion
     paginator = Paginator(maestros, 12)
     page_number = request.GET.get('page')
@@ -100,7 +100,7 @@ def maestro_solicitudes(request, pk):
 
 
     #AL PARECER QUEDO FUNCIONANDO BIEN EL FILTRADO
-    solicitudes = SolicitudTarea.objects.filter(perfil_maestro_id = pk)
+    solicitudes = SolicitudTarea.objects.filter(perfil_maestro_id = pk).order_by('-created_date')
     #solicitudes = SolicitudTarea.objects.all().filter(perfil_maestro == request.pk)
 
     
@@ -164,7 +164,7 @@ def maestro_editar(request, pk):
 #Agregar paginacion
 @login_required(login_url='/login')
 def solicitud_lista(request):
-    solicitud_tareas = SolicitudTarea.objects.order_by('id')
+    solicitud_tareas = SolicitudTarea.objects.order_by('-id')
     """
         paginator = Paginator(maestros, 12)
         page_number = request.GET.get('page')
@@ -284,7 +284,7 @@ def mis_usuarios(request):
 
 @login_required(login_url='/login')
 def mis_maestros(request):
-    maestros = PerfilMaestro.objects.filter(author_id = request.user.id)
+    maestros = PerfilMaestro.objects.filter(author_id = request.user.id).order_by('-created_date')
     paginator = Paginator(maestros, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -294,7 +294,7 @@ def mis_maestros(request):
 @login_required(login_url='/login')
 def mis_solcitudes(request):
     
-    solicitudes = SolicitudTarea.objects.filter(author_id = request.user.id)
+    solicitudes = SolicitudTarea.objects.filter(author_id = request.user.id).order_by('-created_date')
     paginator = Paginator(solicitudes, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

@@ -8,10 +8,13 @@
 
         <div class="usuarios">
             <h1><a href="{% url 'usuario_detalle' pk=usuario.pk %}" style="color:#008cff">Nombre: {{ usuario.nombre }}  {{ usuario.apellidos }}</a></h1>
-            <h3>Rut: {{ usuario.rut }}</h3>
-            <p>Celular {{ usuario.celular }} </p>
+            <!--
+                <h3>Rut: {{ usuario.rut }}</h3>
+                <p>Celular {{ usuario.celular }} </p>
+                <p>Direccion: {{ usuario.direccion }} </p>
+                
+            -->
             <p>Fecha de nacimiento: {{ usuario.fecha_nacimiento }} </p>
-            <p>Direccion: {{ usuario.direccion }} </p>
             <p>Comuna: {{ usuario.comuna }} </p>
             <p>Genero: {{ usuario.genero }} </p>
             <p>Verificacion: {{ usuario.verificacion }} </p>

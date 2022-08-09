@@ -3,7 +3,9 @@
 
 {% block content %}
 <div class="col-md-12">
-    
+
+
+    {% if user.is_authenticated %}
     <div>        
         <p>*Recuerda Completar tu perfil de Usuario antes de utilizar el sistema</p>
         
@@ -11,7 +13,7 @@
 
     <div>
         <a href="/usuario/nueva">
-        <button type="button" class="btn btn-primary btn-lg btn-block">Completar Perfil Usuario</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block">Crear Perfil Usuario</button>
         </a>
 
     </div>
@@ -33,22 +35,120 @@
             </a>
     
         </div>
+       
+        
         
     </div>
+
+    
+    <div align="center">
+    </br>
+        <div >
+            <h3>Quienes Somos</h3>
+            <p>Un grupo de trabajo de estudiantes por titularse que en su proyecto busca ayudar 
+                a las personas a conectarse. Para poder ayudarse y buscar solucionar problemas que 
+                se pueden tener, te podras publicar como maestro y ofrecer tu ayuda a otros 
+                o simplemente podras pedir ayuda a maestros con problemas que puedes llegar a tener 
+                en la casa, oficina o donde tu quieras.
+            </p>
+        </div>
+        
+    </div>
+    {% else %}
+    <div align="center">
+        <b>Acuerdo de responsabilidades</b>
+        <p>Chile actualmente cuenta con una ley de protección de datos personales (ley 19.628).
+            Para QuienPodrayudarme es muy importante la confianza de nuestros usuarios, es por 
+            esto que su información personal siempre será tratada de manera confidencial de acuerdo
+             con las leyes, las directivas, los reglamentos y los principios aplicables a la protección
+              de datos personales.
+        </p>
+        <p>
+            Por esta razon al momento de Registrarse dentro de la pagina estaras de acuerdo con nuestra simple politica
+             de uso de datos, en la cual 
+            <b>nos comprometemos a utilizar tus datos solo para el funcionamiento de la pagina
+              y que tus datos mas sensibles seran tratados con el mayor cuidado y no publicados de forma general 
+              para todo el publico, solo seran para el funcionamiento de tus solicitudes.
+            </b>
+        </p>
+    </div>
+
+    
+    
+    <div class="row">
+        <div class="col-md-4" style="border:3px solid lightblue">
+            <h1 style="color: #4fc3f7;" >Paso 1</h1>
+            <p>
+            </p>
+            <b>
+            <ul>
+                <li>Leer Acuerdo de Responsabilidades
+                <li>Registrarse
+                <li>Iniciar Sesion
+            </ul>
+            </b>
+        </div>
+        <div class="col-md-4" style="border:3px solid lightblue">
+            <h1 style="color: #4fc3f7;">Paso 2</h1>
+            <p>
+            </p>
+            <b>
+            <ul>
+                <li>Completa tu Perfil de Usuario
+                <li>Hace Sugerencias 
+                <li>Revisa Categorias y Comunas soportadas
+                
+            </ul>
+            </b>
+        </div>
+        <div class="col-md-4" style="border:3px solid lightblue">
+            <h1 style="color: #4fc3f7;">Paso 3</h1>
+            <p>
+            </p>
+            <b>
+            <ul>
+                <li>Busca Maestros
+                <li>Publicate como Maestro
+                <li>Coordina Solicitudes
+            </ul>
+            </b>
+        </div>
+
+    </div>
+
+    <div align="center">
+    </br>
+        <a href="/registrar" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Registrar Cuenta</a>
+
+        <a href="/login" class="btn btn-second btn-lg active" role="button" aria-pressed="true">Iniciar Sesion</a>
+        
+    </div>
+    <div align="center">
+    </br>
+        
+        <h3>Quienes Somos</h3>
+        <p>Un grupo de trabajo de estudiantes por titularse que en su proyecto busca ayudar 
+            a las personas a conectarse. Para poder ayudarse y buscar solucionar problemas que 
+            se pueden tener, te podras publicar como maestro y ofrecer tu ayuda a otros 
+            o simplemente podras pedir ayuda a maestros con problemas que puedes llegar a tener 
+            en la casa, oficina o donde tu quieras.
+        </p>
+       
+    </div>
+
+
+
+                    
+    {% endif %}
+
+
+    
+    
     
 
     
 
 
-
-    {{ request.user.id }} 
-    {{ user.username }}
-    {{ request.user }}
-    {{ user.get_full_name }}
-    {{ user.email }}
-
-
-    <a href="{% url 'logout' %}">Cerrar sesion</a>
 </div>
 {% endblock %}
 

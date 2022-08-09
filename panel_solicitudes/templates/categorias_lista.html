@@ -2,9 +2,17 @@
 
 {% block content %}
     {% for categoria in categorias %} 
-        <div class="categoria">
-            <h2><a href="">Nombre: {{ categoria.nombre }}</a></h2>
-            <p>Descripcion: {{ categoria.descripcion|linebreaksbr }}</p>
+
+
+        <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3" align="">
+
+            <div class="categoria">
+                <h2><a href="">Nombre: {{ categoria.nombre }}</a></h2>
+                <p>Descripcion: {{ categoria.descripcion|linebreaksbr }}</p>
+            </div>
+    
         </div>
+
+
     {% endfor %}
 {% endblock %}

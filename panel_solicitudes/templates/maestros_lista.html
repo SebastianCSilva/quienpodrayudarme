@@ -17,7 +17,7 @@
                 {% url 'maestro_detalle' pk=maestro.pk %}
             -->
             <p><a href="{% url 'maestro_detalle' pk=maestro.pk %}">Rut: {{ maestro.usuario.rut|linebreaksbr }}</a></p>
-            <p>Celular: {{ maestro.usuario.celular }}</p>
+            <p>Comuna: {{ maestro.usuario.comuna }}</p>
             <p>Fecha nacimiento: {{ maestro.usuario.fecha_nacimiento|linebreaksbr }}</p>
             <p>Genero: {{ maestro.usuario.genero|linebreaksbr }}</p>
             <p>Fecha de integracion: {{ maestro.usuario.created_date }}</p>
